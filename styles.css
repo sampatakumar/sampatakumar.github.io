@@ -125,6 +125,19 @@ a:hover {
   position: relative;
   width: 50%;
   max-width: 300px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  margin-left: 25px;
+  border-radius: 50%;
+  border:5px solid rgb(0, 0, 0);
+ animation:mymove 5s infinite;
+}
+
+@keyframes mymove{
+ 25%{
+  box-shadow: 5px 5px  30px;
+ }
 }
 
 .hero-media img {
@@ -151,6 +164,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-items: center;
   font-size: 1.2rem;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -209,18 +223,30 @@ a:hover {
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 5px;
 }
 .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1rem;
+  gap: 5px;
 }
+
 .card h3 {
   margin: 0 0 0.4rem;
   font-size: 1.1rem;
 }
+.card img{
+  width: 50%;
+  border-radius: 25px;
+  border: 2px solid ;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
 .card p {
   margin: 0;
   color: var(--muted);
@@ -286,6 +312,17 @@ a:hover {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-media {
+  position: relative;
+  width: 50%;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  margin-left: 50px;
+}
+
   .nav-inner nav {
     display: none;
   } /* Keep header minimal on mobile */
@@ -308,6 +345,7 @@ html {
 .hero-media {
   transform-style: preserve-3d;
   will-change: transform, opacity;
+
 }
 
 /* Card 3D hover */
