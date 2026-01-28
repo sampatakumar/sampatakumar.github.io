@@ -35,6 +35,21 @@
         <a href="#certifications">Certifications</a>
         <!-- <a href="#contact" class="btn">Contact</a> -->
       </nav>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <div class="mobile-menu">
+        <nav>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#certifications">Certifications</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -45,9 +60,9 @@
       </div>
       <div class="hero-copy">
         <h1>Sampatakumar S V</h1>
-        <p class="lead">A passionate student and aspiring frontend developer with experience in building modern web applications using  <b>React, JavaScript, and UI frameworks</b> . Interested in  <b>AI-driven applications</b> , creative problem-solving, and continuous learning. Seeking opportunities to apply technical skills in real-world projects and grow as a developer.</p>
+        <p class="lead">A passionate student and aspiring frontend developer with experience in building modern web applications using <b>React, JavaScript, and UI frameworks</b>. Interested in <b>AI-driven applications</b>, creative problem-solving, and continuous learning. Seeking opportunities to apply technical skills in real-world projects and grow as a developer.</p>
         <div class="cta-row">
-          <a style="text-decoration: none;" class="btn primary" href="mailto:wlcmdevilworld@gmail.com">Get in touch</a>
+          <a style="text-decoration: none;" class="btn primary" href="mailto:sampatakumarsv@gmail.com">Get in touch</a>
           <a style="text-decoration: none;"  class="btn" href="https://www.linkedin.com/in/sampatakumar-sv" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -132,7 +147,7 @@
       <div class="container">
         <h2>Certifications</h2>
         <ul class="kv-list">
-          <li style="list-style: inside;"><strong>Introduction to Software Engineering</strong> <button style="cursor: pointer; border-radius: 30%;"><a  style="list-style: none; text-decoration: none;" href="certificates/ISE.pdf">⌊↗</a></button><iframe id="preview" src="iframes/ise.png" frameborder="0">rhghgrhh</iframe></li>
+          <li style="list-style: inside;"><strong>Introduction to Software Engineering</strong> <a style="display:inline-block; border: 1px solid var(--border); border-radius: 6px; padding: 2px 6px; margin-left:8px; text-decoration: none;" href="certificates/ISE.pdf" target="_blank" rel="noopener">⌊↗</a><iframe id="preview" src="iframes/ise.png" frameborder="0"></iframe></li>
         </ul>
       </div>
     </section>
@@ -173,9 +188,7 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+
 
 
 
@@ -233,6 +246,27 @@
     document.body.style.setProperty("--x", `${e.clientX}px`);
     document.body.style.setProperty("--y", `${e.clientY}px`);
   });
+
+  /* ===== Mobile Menu ===== */
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+  if(mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      mobileBtn.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+  }
 </script>
 
 </body>
