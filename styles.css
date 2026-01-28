@@ -10,7 +10,7 @@
 
 * {
   box-sizing: border-box;
-  
+ 
 }
 html,
 body {
@@ -220,39 +220,75 @@ a:hover {
 .kv-list li strong {
   color: var(--text);
 }
-
 .cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-}
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem;
-  gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
-.card h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1.1rem;
-}
-.card img{
-  width: 50%;
-  border-radius: 25px;
-  border: 2px solid ;
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+.card-link {
+  text-decoration: none;
+  color: inherit;
 }
 
-.card p {
+.overlay-card {
+  position: relative;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Background image */
+.overlay-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Dark gradient overlay */
+.overlay-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.2)
+  );
+  z-index: 1;
+}
+
+/* Text overlay */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  padding: 1.2rem;
+  z-index: 2;
+}
+
+.overlay h3 {
   margin: 0;
-  color: var(--muted);
-  font-family:cursive;
+  font-size: 1.25rem;
+  color: #fff;
 }
+
+.overlay p {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #e5e5e5;
+}
+
+/* Hover effects */
+.overlay-card:hover img {
+  transform: scale(1.08);
+}
+
+.overlay-card:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
 
 .contact-grid {
   display: grid;
