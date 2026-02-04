@@ -3,24 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sampatakumar S V || Portfolio</title>
+    <title>Sampatakumar S V | Portfolio</title>
     <meta
       name="description"
       content="AI/ML aspiring professional with IBM certifications and hands-on projects in Python, ML, and MERN."
     />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="assets/favicon.jpg" />
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "sampatakumar S V",
+        "name": "Sampatakumar S V",
         "email": "mailto:sampatakumarsv@gmail.com",
         "jobTitle": "Aspiring AI/ML Professional",
         "alumniOf": "Rajiv Gandhi Institute of Technology, Bangalore",
@@ -31,196 +37,225 @@
   </head>
 
   <body>
+    <!-- Navbar -->
     <header class="nav">
       <div class="container nav-inner">
         <a class="brand" href="#">SV</a>
+
         <button
           class="nav-toggle"
           aria-label="Toggle navigation"
           aria-expanded="false"
-          aria-controls="primary-navigation"
         >
-          <span></span> <span></span> <span></span>
+          <span></span><span></span><span></span>
         </button>
-        <nav class="nav-menu" id="primary-navigation">
-          <a href="#about">About</a> <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
+
+        <nav class="nav-menu">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Projects</a>
           <a href="#education">Education</a>
           <a href="#certifications">Certifications</a>
           <a href="Resume/index.html" target="_blank">Resume</a>
         </nav>
       </div>
     </header>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-media">
-          <img src="assets/avatar.jpeg" alt="Portrait of Sampatakumar S V" />
-          <div class="overlay">Sampatakumar S V</div>
-        </div>
-        <div class="hero-copy">
-          <h1>Sampatakumar S V</h1>
-          <p class="lead">
-            A passionate student and aspiring frontend developer with experience
-            in building modern web applications using
-            <b>React, JavaScript, and UI frameworks</b> . Interested in
-            <b>AI-driven applications</b> , creative problem-solving, and
-            continuous learning. Seeking opportunities to apply technical skills
-            in real-world projects and grow as a developer.
-          </p>
-          <div class="cta-row">
-            <a
-              style="text-decoration: none"
-              class="btn primary"
-              href="mailto:wlcmdevilworld@gmail.com"
-              >Get in touch</a
-            >
-            <a
-              style="text-decoration: none"
-              class="btn"
-              href="https://www.linkedin.com/in/sampatakumar-sv"
-              target="_blank"
-              rel="noopener"
-              >LinkedIn</a
-            >
-          </div>
-        </div>
-      </div>
-    </section>
+
     <main>
-      <section id="about" class="section">
-        <div class="container">
-          <h2>About</h2>
-          <p>
-            I am a motivated and detail-oriented student with a strong interest
-            in web development and artificial intelligence. I have hands-on
-            experience building modern web applications using HTML, CSS,
-            JavaScript, React, and Vite, and I enjoy creating clean,
-            user-friendly interfaces with a focus on performance and design. I
-            have worked on projects involving AI-powered tools, creative UI
-            design, and frontend optimization, which has helped me develop
-            problem-solving and analytical skills. I am eager to learn new
-            technologies, adapt quickly, and contribute to real-world projects
-            while continuously improving my technical and professional skills.
-          </p>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container grid-2">
+          <div class="hero-media tilt-card">
+            <div class="hex-frame">
+              <img
+                src="assets/avatar.jpeg"
+                alt="Portrait of Sampatakumar S V"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="hero-content">
+            <h1>Hi, I'm <span class="text-gradient">Sampatakumar</span></h1>
+            <p class="lead">
+              A passionate developer building modern web applications with
+              <span class="text-gradient">React & JavaScript</span>. Exploring
+              the frontiers of <span class="text-gradient">AI/ML</span>.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="mailto:wlcmdevilworld@gmail.com">
+                Get in Touch
+              </a>
+              <a
+                class="btn btn-secondary"
+                href="https://www.linkedin.com/in/sampatakumar-sv"
+                target="_blank"
+                rel="noopener"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
+      <!-- About Section -->
+      <section id="about" class="section">
+        <div class="container">
+          <h2>About Me</h2>
+          <div class="glass-card">
+            <p>
+              I am a motivated and detail-oriented student with a strong
+              interest in web development and artificial intelligence. I have
+              hands-on experience building modern web applications using HTML,
+              CSS, JavaScript, React, and Vite.
+            </p>
+            <p>
+              I enjoy creating clean, user-friendly interfaces with a focus on
+              performance and design. Currently, I am working on projects
+              involving AI-powered tools and frontend optimization, developing
+              problem-solving and analytical skills along the way.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
       <section id="skills" class="section">
         <div class="container grid-2">
-          <div>
-            <h2>Core skills</h2>
+          <div class="tilt-card glass-card">
+            <h3>Core Skills</h3>
             <ul class="pill-list">
               <li>Python</li>
-              <li>MERN (MongoDB, Express, React, Node)</li>
-              <li>Communication</li>
-              <li>Team Leadership</li>
+              <li>MERN Stack</li>
+              <li>React.js</li>
+              <li>JavaScript (ES6+)</li>
+              <li>Leadership</li>
               <li>Critical Thinking</li>
               <li>Fast Learner</li>
-              <li>Multitasking</li>
             </ul>
           </div>
-          <div>
-            <h2>Tech stack highlights</h2>
+
+          <div class="tilt-card glass-card">
+            <h3>Tech Stack</h3>
             <ul class="kv-list">
-              <li><strong>Languages:</strong> Python, JavaScript, HTML, CSS</li>
-              <li><strong>Web:</strong> React, Node.js, Express, MongoDB</li>
               <li>
-                <strong>Languages spoken:</strong> English, Kannada, Hindi
+                <strong>Languages</strong>
+                <span>Python, JS, HTML, CSS</span>
+              </li>
+              <li>
+                <strong>Web Frameworks</strong>
+                <span>React, Node.js, Express</span>
+              </li>
+              <li>
+                <strong>Database</strong>
+                <span>MongoDB</span>
+              </li>
+              <li>
+                <strong>Languages Spoken</strong>
+                <span>English, Kannada, Hindi</span>
               </li>
             </ul>
           </div>
         </div>
       </section>
+
+      <!-- Projects Section -->
       <section id="experience" class="section">
         <div class="container">
-          <h2>PROJECTS</h2>
-          <div class="cards">
-            <a href="#" class="card-link">
-              <article class="card overlay-card">
-                <img src="assets/StuConnect.png" alt="EduConnect project" />
-                <div class="overlay">
-                  <h3>EduConnect</h3>
-                  <p>
-                    Student community platform for sharing notes and real-time
-                    discussions.
-                  </p>
-                </div>
-              </article>
+          <h2>Projects</h2>
+          <div class="card-grid">
+            <!-- Project 1 -->
+            <a href="#" class="project-card tilt-card">
+              <img
+                src="assets/StuConnect.png"
+                alt="EduConnect project screenshot"
+                loading="lazy"
+              />
+              <div class="project-overlay">
+                <h3>EduConnect</h3>
+                <p>
+                  Student community platform for notes and real-time
+                  discussions.
+                </p>
+              </div>
             </a>
+
+            <!-- Project 2 -->
             <a
               href="https://rgitx.vercel.app/"
               target="_blank"
               rel="noopener"
-              class="card-link"
+              class="project-card tilt-card"
             >
-              <article class="card overlay-card">
-                <img src="assets/Rgitx.png" alt="RGITX project" />
-                <div class="overlay">
-                  <h3>RGITX</h3>
-                  <p>
-                    Study lab programs easily with a clean and structured
-                    interface.
-                  </p>
-                </div>
-              </article>
+              <img
+                src="assets/Rgitx.png"
+                alt="RGITX project screenshot"
+                loading="lazy"
+              />
+              <div class="project-overlay">
+                <h3>RGITX</h3>
+                <p>
+                  Structured interface for easy access to study lab programs.
+                </p>
+              </div>
             </a>
           </div>
         </div>
       </section>
+
+      <!-- Education Section -->
       <section id="education" class="section">
         <div class="container">
           <h2>Education</h2>
-          <ul class="kv-list">
-            <li>
-              <strong>B.E Computer Science & Engineering:</strong> Rajiv Gandhi
-              Institute of Technology, Bangalore (10/2023–10/2027)
-            </li>
-          </ul>
+          <div class="glass-card">
+            <ul class="kv-list">
+              <li>
+                <strong>B.E Computer Science & Engineering</strong>
+                <span
+                  >Rajiv Gandhi Institute of Technology, Bangalore
+                  (2023–2027)</span
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
+
+      <!-- Certifications Section -->
       <section id="certifications" class="section">
         <div class="container">
           <h2>Certifications</h2>
-          <ul class="kv-list">
-            <li style="list-style: inside">
-              <strong>Introduction to Software Engineering</strong>
-              <button style="cursor: pointer; border-radius: 30%">
+          <div class="glass-card">
+            <ul class="kv-list">
+              <li>
+                <strong>Introduction to Software Engineering</strong>
                 <a
-                  style="list-style: none; text-decoration: none"
                   href="certificates/ISE.pdf"
-                  >⌊↗</a
-                ></button
-              ><iframe id="preview" src="iframes/ise.png" frameborder="0"
-                >rhghgrhh</iframe
-              >
-            </li>
-          </ul>
+                  target="_blank"
+                  class="btn btn-secondary"
+                  style="padding: 4px 10px; font-size: 0.8rem"
+                >
+                  View Certificate ↗
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
-      <!-- <section id="contact" class="section"> <div class="container"> <h2>Contact</h2> <div class="contact-grid"> <div> <p><strong>Email:</strong> <a href="mailto:sampatakumarsv@gmail.com">sampatakumarsv@gmail.com</a></p> <p><strong>Phone:</strong> <a href="tel:+919847924110">+91 98479 24110</a></p> <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sampatakumar-sv" target="_blank" rel="noopener">linkedin.com/in/sampatakumar-sv</a></p> </div> <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST"> <label> <span>Name</span> <input type="text" name="name" required /> </label> <label> <span>Email</span> <input type="email" name="email" required /> </label> <label> <span>Message</span> <textarea name="message" rows="4" required></textarea> </label> <button class="btn primary" type="submit">Send</button> <p class="form-note">This form uses Formspree. Replace the endpoint with your own or remove the form.</p> </form> </div> </div> </section> -->
     </main>
+
+    <!-- Footer -->
     <footer class="footer">
-      <div class="container footer-inner">
+      <div class="container">
         <p>
-          © <span id="y"></span> Sampatakumar S V • Built with HTML & CSS •
-          Hosted on GitHub Pages
+          © <span id="y"></span> Sampatakumar S V • Built with
+          <span class="text-gradient">Cosmic Energy</span>
         </p>
       </div>
     </footer>
-    <script>
-      const toggle = document.querySelector(".nav-toggle");
-      const menu = document.querySelector(".nav-menu");
-      const links = menu.querySelectorAll("a");
-      toggle.addEventListener("click", () => {
-        const isOpen = menu.classList.toggle("active");
-        toggle.classList.toggle("active");
-        toggle.setAttribute("aria-expanded", isOpen);
-      }); // Close menu on link click links.forEach(link => { link.addEventListener("click", () => { menu.classList.remove("active"); toggle.classList.remove("active"); toggle.setAttribute("aria-expanded", "false"); }); });
-    </script>
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
-    <script>
-      // Year document.getElementById('y').textContent = new Date().getFullYear(); /* ===== Scroll Reveal ===== */ const revealElements = document.querySelectorAll( ".section, .card" ); const revealObserver = new IntersectionObserver( entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = 1; entry.target.style.transform = "translateY(0)"; } }); }, { threshold: 0.12 } ); revealElements.forEach(el => { el.style.opacity = 0; el.style.transform = "translateY(24px)"; el.style.transition = "0.7s cubic-bezier(.2,.8,.2,1)"; revealObserver.observe(el); }); /* ===== Hero Image 3D Tilt ===== */ const heroMedia = document.querySelector(".hero-media img"); if (heroMedia) { heroMedia.addEventListener("mousemove", e => { const rect = heroMedia.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; const rotateY = ((x / rect.width) - 0.5) * 14; const rotateX = ((y / rect.height) - 0.5) * -14; heroMedia.style.transform = rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05); }); heroMedia.addEventListener("mouseleave", () => { heroMedia.style.transform = "rotateX(0) rotateY(0) scale(1)"; }); } /* ===== Ambient Mouse Glow ===== */ window.addEventListener("mousemove", e => { document.body.style.setProperty("--x", ${e.clientX}px); document.body.style.setProperty("--y", ${e.clientY}px); });
-    </script>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
   </body>
 </html>
