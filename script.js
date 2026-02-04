@@ -112,4 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animateGlow);
     }
     animateGlow();
+
+    /* ================= TYPEWRITER EFFECT ================= */
+    const typewriterElement = document.getElementById('typewriter');
+    if (typewriterElement) {
+        const text = "Sampatakumar";
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                typewriterElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 150); // Typing speed
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(type, 1000);
+    }
 });
