@@ -181,6 +181,7 @@ ul {
   letter-spacing: -0.03em;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -359,7 +360,6 @@ ul {
   border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 16/9;
-  group: project;
 }
 
 .project-card img {
