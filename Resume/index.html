@@ -45,9 +45,7 @@
         color: var(--text);
         background: var(--bg);
         line-height: 1.6;
-        transition:
-          background-color 0.6s ease,
-          color 0.6s ease;
+        /* Removed slow background transition for snappy feel with swallow effect */
         overflow-x: hidden;
         position: relative;
       }
@@ -77,6 +75,9 @@
         max-width: 900px;
         margin: 0 auto;
         padding: 48px 24px;
+        /* Ensure content stays ABOVE the swallow overlay */
+        position: relative;
+        z-index: 10;
       }
 
       /* Fixed Theme Toggle Button */
@@ -84,7 +85,8 @@
         position: fixed;
         top: 20px;
         right: 20px;
-        z-index: 1000;
+        /* Highest z-index to stay clickable */
+        z-index: 50;
         background: var(--bg);
         color: var(--text);
         border: 1px solid var(--border);
@@ -105,33 +107,15 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
-      /* 3D Water Ripple Effect */
-      .ripple-ring {
+      /* Page Swallow Overlay */
+      .theme-transition-overlay {
         position: fixed;
         border-radius: 50%;
+        background: var(--accent); /* Placeholder, set by JS */
         transform: translate(-50%, -50%) scale(0);
         pointer-events: none;
-        z-index: 9999;
-        background: transparent;
-        opacity: 0;
-
-        /* Glass/Water Simulation */
-        backdrop-filter: blur(2px) contrast(1.2);
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        box-shadow:
-          inset 0 0 20px rgba(255, 255, 255, 0.5),
-          /* Inner Highlight (Crest) */ 0 0 15px rgba(0, 0, 0, 0.2),
-          /* Outer Shadow (Trough) */ 0 0 50px var(--accent); /* Color Tint */
-
-        will-change: transform, opacity;
-      }
-
-      [data-theme="dark"] .ripple-ring {
-        border-color: rgba(255, 255, 255, 0.15);
-        box-shadow:
-          inset 0 0 20px rgba(255, 255, 255, 0.1),
-          0 0 20px rgba(0, 0, 0, 0.5),
-          0 0 60px var(--accent);
+        z-index: 5; /* Below content (10) but above body bg */
+        will-change: transform;
       }
 
       header {
@@ -430,61 +414,64 @@
         toggle.textContent = savedTheme === "dark" ? "☀️ Light" : "🌙 Dark";
       }
 
-      // Advanced 3D Water Ripple Logic
+      let isAnimating = false;
+
+      // Page Swallow Animation Logic
       toggle.addEventListener("click", (e) => {
-        // 5 Concentric rings for full wave effect
-        const rings = 5;
-        // Scale calculation
-        const maxDist = Math.max(window.innerWidth, window.innerHeight) * 1.5;
+        if (isAnimating) return;
+        isAnimating = true;
 
         const isDark = body.getAttribute("data-theme") === "dark";
-        const newTheme = isDark ? "light" : "dark";
+        const targetTheme = isDark ? "light" : "dark";
 
-        // Toggle theme immediately
-        body.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        toggle.textContent = newTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+        // 1. Create the overlay
+        const overlay = document.createElement("div");
+        overlay.classList.add("theme-transition-overlay");
 
-        // Create ripples
-        for (let i = 0; i < rings; i++) {
-          setTimeout(() => {
-            const ripple = document.createElement("div");
-            ripple.classList.add("ripple-ring");
+        // 2. Set color to the target theme's background
+        overlay.style.backgroundColor =
+          targetTheme === "dark" ? "#0b0f19" : "#ffffff";
 
-            // Start small
-            const size = 50;
-            ripple.style.width = `${size}px`;
-            ripple.style.height = `${size}px`;
-            // Position at click center
-            ripple.style.left = `${e.clientX}px`;
-            ripple.style.top = `${e.clientY}px`;
+        // 3. Position and Size
+        const size = Math.max(window.innerWidth, window.innerHeight) * 2.5; // Ensure it covers corners
+        overlay.style.width = `${size}px`;
+        overlay.style.height = `${size}px`;
+        overlay.style.left = `${e.clientX}px`;
+        overlay.style.top = `${e.clientY}px`;
 
-            document.body.appendChild(ripple);
+        document.body.appendChild(overlay);
 
-            // Animate
-            const animation = ripple.animate(
-              [
-                {
-                  transform: "translate(-50%, -50%) scale(0.5)",
-                  opacity: 0.8,
-                  borderWidth: "8px",
-                },
-                {
-                  transform: `translate(-50%, -50%) scale(${maxDist / 25})`, // Scale divisor depends on base size (50px * X = maxDist)
-                  opacity: 0,
-                  borderWidth: "0px",
-                },
-              ],
-              {
-                duration: 2000,
-                easing: "cubic-bezier(0.19, 1, 0.22, 1)", // "Ease Out Expo" feel for water burst
-                fill: "forwards",
-              },
-            );
+        // 4. Animate Expansion
+        const animation = overlay.animate(
+          [
+            { transform: "translate(-50%, -50%) scale(0)" },
+            { transform: "translate(-50%, -50%) scale(1)" },
+          ],
+          {
+            duration: 500, // Quick swallow
+            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            fill: "forwards",
+          },
+        );
 
-            animation.onfinish = () => ripple.remove();
-          }, i * 120); // Tighter stagger for cohesive wave
-        }
+        // 5. When fully covered, switch theme and fade out overlay
+        animation.onfinish = () => {
+          // Toggle system
+          body.setAttribute("data-theme", targetTheme);
+          localStorage.setItem("theme", targetTheme);
+          toggle.textContent = targetTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+
+          // Fade out to reveal new theme content
+          const fadeOut = overlay.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 300,
+            fill: "forwards",
+          });
+
+          fadeOut.onfinish = () => {
+            overlay.remove();
+            isAnimating = false;
+          };
+        };
       });
 
       const img = document.getElementById("profilePic");
