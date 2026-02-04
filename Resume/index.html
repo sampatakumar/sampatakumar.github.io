@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sampath Kumar S V | Frontend Developer</title>
+  <meta name="description" content="Frontend Developer portfolio of Sampath Kumar S V. React, JavaScript, modern web development." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b0f19;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --accent: #60a5fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      transition: background-color 0.6s ease, color 0.6s ease;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      position: relative;
+    }
+
+    a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    a:hover::after { width: 100%; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .theme-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      clip-path: circle(0% at var(--x) var(--y));
+      transition: clip-path 0.9s ease-in-out;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .theme-overlay.active {
+      clip-path: circle(150% at var(--x) var(--y));
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #60a5fa, #22d3ee);
+      padding: 3px;
+    }
+
+    .avatar-inner {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--bg);
+      position: relative;
+    }
+
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: grayscale(100%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+      opacity: 0;
+    }
+
+    .avatar-wrapper:hover .profile-pic {
+      filter: grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    .skeleton {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+      animation: shimmer 1.4s infinite linear;
+    }
+
+    [data-theme="dark"] .skeleton {
+      background: linear-gradient(90deg, #1f2937 25%, #374151 37%, #1f2937 63%);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+
+    section { margin-bottom: 56px; }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 24px;
+    }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .skill {
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .projects { display: grid; gap: 24px; }
+
+    .project {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Click ripple effect */
+    .click-ripple {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      background: radial-gradient(circle, rgba(37,99,235,0.35) 0%, rgba(37,99,235,0.15) 60%, transparent 70%);
+      animation: ripple 0.6s ease-out forwards;
+      z-index: 9999;
+    }
+
+    [data-theme="dark"] .click-ripple {
+      background: radial-gradient(circle, rgba(96,165,250,0.4) 0%, rgba(96,165,250,0.18) 60%, transparent 70%);
+    }
+
+    @keyframes ripple {
+      to { transform: translate(-50%, -50%) scale(12); opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      header { grid-template-columns: 1fr; text-align: center; }
+      .avatar-wrapper { margin: 0 auto; }
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+  <div class="theme-overlay" id="themeOverlay"></div>
+
+  <main class="container">
+    <header>
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <div class="avatar-inner">
+          <div class="skeleton" id="avatarSkeleton"></div>
+          <img src="./2.jpg" alt="Sampatakumar S V profile photo" class="profile-pic" id="profilePic" />
+        </div>
+      </div>
+      <div>
+        <h1>Sampatakumar S V</h1>
+        <p>Frontend Developer focused on building clean, responsive, and scalable web applications using React and modern JavaScript.</p>
+        <div class="links">
+          <span>Bangalore, India</span>
+          <a href="https://sampatakumar.github.io/" target="_blank">Portfolio</a>
+          <a href="https://github.com/SAMPATAKUMAR" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/sampatakumar-sv/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="divider"></div>
+      <div class="skills">
+        <span class="skill">React</span>
+        <span class="skill">JavaScript (ES6+)</span>
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">Responsive Design</span>
+        <span class="skill">Component Architecture</span>
+        <span class="skill">Git & GitHub</span>
+        <span class="skill">UI/UX Basics</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="divider"></div>
+      <div class="projects">
+        <div class="project">
+          <h3>Student Collaboration Platform</h3>
+          <p>A React-based web application designed to support collaboration between students.</p>
+          <div class="actions">
+            <a href="#" target="_blank">Live Demo</a>
+            <a href="#" target="_blank">Source Code</a>
+          </div>
+        </div>
+        <div class="project">
+          <h3>AI-Assisted Script Planning Application</h3>
+          <p>An interactive frontend for planning and organizing scripts.</p>
+          <div class="actions">
+            <a href="#" target="_blank">Live Demo</a>
+            <a href="#" target="_blank">Source Code</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="divider"></div>
+      <p><strong>Rajiv Gandhi Institute of Technology, Bangalore</strong><br />Bachelor’s Degree (Student)</p>
+    </section>
+
+    <footer>
+      <span>© 2026 Sampath Kumar S V</span>
+      <span>Frontend Developer · React</span>
+    </footer>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const overlay = document.getElementById('themeOverlay');
+    const body = document.body;
+
+    // Apply saved theme on load (localStorage persistence)
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      body.setAttribute('data-theme', savedTheme);
+      toggle.textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    toggle.addEventListener('click', (e) => {
+      overlay.style.setProperty('--x', `${e.clientX}px`);
+      overlay.style.setProperty('--y', `${e.clientY}px`);
+      overlay.classList.add('active');
+
+      setTimeout(() => {
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        const newTheme = isDark ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        toggle.textContent = newTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      }, 300);
+
+      setTimeout(() => overlay.classList.remove('active'), 900);
+    });
+
+    const img = document.getElementById('profilePic');
+    const skeleton = document.getElementById('avatarSkeleton');
+    img.addEventListener('load', () => {
+      skeleton.style.display = 'none';
+      img.style.opacity = '1';
+    });
+
+    document.addEventListener('click', (e) => {
+      const ripple = document.createElement('span');
+      ripple.className = 'click-ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top = e.clientY + 'px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  </script>
+</body>
+</html>
