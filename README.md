@@ -2,7 +2,7 @@
 
 Welcome to my personal portfolio website! This project showcases my journey as an aspiring AI/ML professional and web developer, featuring my skills, projects, and certifications in a modern, interactive interface.
 
-![Portfolio Preview](assets/avatar.webp)
+
 
 ## 🚀 Live Demo
 
