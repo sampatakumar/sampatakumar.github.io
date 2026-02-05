@@ -1,27 +1,19 @@
-/* ================= RESET & VARIABLES ================= */
 :root {
-  /* Cosmic Glass Palette */
   --bg-dark: #030712;
   --bg-card: rgba(17, 24, 39, 0.6);
   --bg-card-hover: rgba(31, 41, 55, 0.7);
-
   --text-main: #f9fafb;
   --text-muted: #9ca3af;
-  --text-accent: #c4b5fd; /* Soft violet text */
-
-  --primary: #8b5cf6; /* Violet */
-  --secondary: #06b6d4; /* Cyan */
+  --text-accent: #c4b5fd;
+  --primary: #8b5cf6;
+  --secondary: #06b6d4;
   --accent-glow: rgba(139, 92, 246, 0.5);
-
   --border: rgba(255, 255, 255, 0.1);
   --border-hover: rgba(139, 92, 246, 0.3);
-
   --font-body: "Inter", sans-serif;
   --font-heading: "Outfit", sans-serif;
-
   --nav-height: 70px;
 }
-
 *,
 *::before,
 *::after {
@@ -29,12 +21,10 @@
   margin: 0;
   padding: 0;
 }
-
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height);
 }
-
 body {
   font-family: var(--font-body);
   background-color: var(--bg-dark);
@@ -43,8 +33,6 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-
-/* Ambient Background Glow */
 body::before {
   content: "";
   position: fixed;
@@ -66,8 +54,6 @@ body::before {
     );
   z-index: -2;
 }
-
-/* Mouse Follower Glow */
 body::after {
   content: "";
   position: fixed;
@@ -85,8 +71,6 @@ body::after {
   z-index: -1;
   will-change: transform;
 }
-
-/* Typography */
 h1,
 h2,
 h3,
@@ -98,7 +82,6 @@ h6 {
   color: #fff;
   line-height: 1.2;
 }
-
 h1 {
   font-size: 3.5rem;
   letter-spacing: -0.02em;
@@ -125,36 +108,28 @@ a {
 ul {
   list-style: none;
 }
-
-/* Gradient Text Utility */
 .text-gradient {
   background: linear-gradient(135deg, var(--text-main), var(--text-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-/* Layout Utilities */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
-
 .section {
   padding: 6rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
-
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 3rem;
   align-items: center;
 }
-
-/* ================= NAVIGATION ================= */
 .nav {
   position: fixed;
   top: 0;
@@ -166,14 +141,12 @@ ul {
   z-index: 1000;
   transition: all 0.3s ease;
 }
-
 .nav-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
 }
-
 .brand {
   font-family: var(--font-heading);
   font-size: 1.5rem;
@@ -184,24 +157,20 @@ ul {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .nav-menu {
   display: flex;
   gap: 2rem;
 }
-
 .nav-menu a {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-muted);
   position: relative;
 }
-
 .nav-menu a:hover,
 .nav-menu a.active {
   color: var(--text-main);
 }
-
 .nav-menu a::after {
   content: "";
   position: absolute;
@@ -212,12 +181,9 @@ ul {
   background: var(--primary);
   transition: width 0.3s ease;
 }
-
 .nav-menu a:hover::after {
   width: 100%;
 }
-
-/* Hamburger */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -227,7 +193,6 @@ ul {
   cursor: pointer;
   padding: 4px;
 }
-
 .nav-toggle span {
   width: 24px;
   height: 2px;
@@ -236,36 +201,29 @@ ul {
     transform 0.3s ease,
     opacity 0.3s ease;
 }
-
-/* ================= HERO SECTION ================= */
 .hero {
   padding: 10rem 0 6rem;
   overflow: hidden;
   position: relative;
 }
-
 .hero-content h1 {
   margin-bottom: 1.5rem;
 }
-
 .hero-content .lead {
   font-size: 1.25rem;
   max-width: 600px;
   margin-bottom: 2rem;
 }
-
 .hero-actions {
   display: flex;
   gap: 1rem;
 }
-
 .hero-media {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .hex-frame {
   position: relative;
   width: 320px;
@@ -276,14 +234,11 @@ ul {
   border: 1px solid var(--border);
   transform-style: preserve-3d;
 }
-
 .hex-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-/* ================= BUTTONS ================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -296,13 +251,11 @@ ul {
   overflow: hidden;
   z-index: 1;
 }
-
 .btn-primary {
   background: var(--primary);
   color: white;
   box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
 }
-
 .btn-primary::before {
   content: "";
   position: absolute;
@@ -314,30 +267,24 @@ ul {
   z-index: -1;
   transition: opacity 0.3s;
 }
-
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
 }
-
 .btn-secondary {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   color: var(--text-main);
 }
-
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--text-main);
 }
-
-/* ================= COMPONENT: CARDS ================= */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
-
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -346,29 +293,24 @@ ul {
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .glass-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-hover);
   transform: translateY(-5px);
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
-
-/* Project Cards */
 .project-card {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 16/9;
 }
-
 .project-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
-
 .project-overlay {
   position: absolute;
   inset: 0;
@@ -381,23 +323,18 @@ ul {
   transform: translateY(20px);
   transition: all 0.3s ease;
 }
-
 .project-card:hover img {
   transform: scale(1.1);
 }
-
 .project-card:hover .project-overlay {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Skills */
 .pill-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
-
 .pill-list li {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
@@ -406,61 +343,47 @@ ul {
   font-size: 0.9rem;
   transition: all 0.3s;
 }
-
 .pill-list li:hover {
   background: rgba(139, 92, 246, 0.15);
   border-color: var(--primary);
   color: #fff;
   transform: scale(1.05);
 }
-
-/* Key-Value List */
 .kv-list li {
   display: flex;
   justify-content: space-between;
   padding: 0.8rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 .kv-list li:last-child {
   border-bottom: none;
 }
-
 .kv-list strong {
   color: var(--text-main);
 }
-
-/* ================= FOOTER ================= */
 .footer {
   padding: 3rem 0;
   text-align: center;
   border-top: 1px solid var(--border);
   margin-top: 4rem;
 }
-
-/* ================= ANIMATIONS ================= */
 .reveal-hidden {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
-
 .revealed {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ================= MOBILE RESPONSIVENESS ================= */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
   }
-
   .nav-toggle {
     display: flex;
     z-index: 1001;
   }
-
   .nav-menu {
     position: fixed;
     top: 0;
@@ -473,12 +396,9 @@ ul {
     transform: translateX(100%);
     transition: transform 0.3s ease;
   }
-
   .nav-menu.active {
     transform: translateX(0);
   }
-
-  /* Toggle Animation */
   .nav-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 6px);
   }
@@ -488,22 +408,17 @@ ul {
   .nav-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -6px);
   }
-
   .hero-inner {
-    flex-direction: column-reverse; /* Text first, but usually hero image on top for mobile? User has side-by-side. Layout logic says grid-2. */
+    flex-direction: column-reverse;
   }
-
   .grid-2 {
     grid-template-columns: 1fr;
   }
-
   .hex-frame {
     width: 250px;
     height: 250px;
   }
 }
-
-/* ================= TYPEWRITER CURSOR ================= */
 .cursor {
   display: inline-block;
   color: var(--primary);
@@ -511,7 +426,6 @@ ul {
   animation: blink 1s step-end infinite;
   margin-left: 2px;
 }
-
 @keyframes blink {
   0%,
   100% {
