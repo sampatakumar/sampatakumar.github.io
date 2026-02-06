@@ -31,7 +31,7 @@
       name="identifier-urls"
       content="https://sampatakumar.github.io/robots.txt"
     />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -39,7 +39,15 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      />
+    </noscript>
     <link rel="manifest" href="manifest.json" />
 
     <!-- Structured Data -->
@@ -415,10 +423,12 @@
           <div class="avatar-inner">
             <div class="skeleton" id="avatarSkeleton"></div>
             <img
-              src="./2.jpg"
+              src="./2.webp"
               alt="Sampatakumar S V profile photo"
               class="profile-pic"
               id="profilePic"
+              width="124"
+              height="124"
             />
           </div>
         </div>
