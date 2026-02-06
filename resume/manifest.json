@@ -50,5 +50,12 @@
       "url": "https://rgitx.vercel.app/",
       "id": "https://rgitx.vercel.app/"
     }
-  ]
+  ],
+  "social_links": {
+    "instagram": "@sampatakumar_sv",
+    "twitter": "@__sampatakumar",
+    "linkedin": "https://www.linkedin.com/in/sampatakumar-sv",
+    "github": "https://github.com/sampatakumar",
+    "facebook": "https://www.facebook.com/share/1CUACAsqy6/"
+  }
 }
