@@ -36,6 +36,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -361,6 +365,42 @@
           margin: 0 auto;
         }
       }
+
+      /* Social Buttons */
+      .social-btns {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .social-btns a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 99px;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-decoration: none;
+      }
+
+      /* Remove the custom underline animation for these buttons */
+      .social-btns a::after {
+        display: none;
+      }
+
+      .social-btns a:hover {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      }
     </style>
   </head>
 
@@ -389,13 +429,20 @@
           </p>
           <div class="links">
             <span>Bangalore, India</span>
-            <a href="../index.html" target="_blank">Portfolio</a>
-            <a href="https://github.com/SAMPATAKUMAR" target="_blank">GitHub</a>
-            <a
-              href="https://www.linkedin.com/in/sampatakumar-sv/"
-              target="_blank"
-              >LinkedIn</a
-            >
+            <div class="social-btns">
+              <a href="../index.html" target="_blank">
+                <i class="fa-solid fa-globe"></i> Portfolio
+              </a>
+              <a href="https://github.com/SAMPATAKUMAR" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sampatakumar-sv/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+            </div>
           </div>
         </div>
       </header>
