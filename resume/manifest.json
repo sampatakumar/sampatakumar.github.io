@@ -1,0 +1,54 @@
+{
+  "name": "Sampatakumar S V",
+  "short_name": "Sampatakumar",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "description": "Frontend Developer portfolio of Sampatakumar S V. React, JavaScript, modern web development.",
+  "icons": [
+    {
+      "src": "assets/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Portfolio Home",
+      "url": "../index.html",
+      "description": "Back to Portfolio"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "name": "Portfolio",
+      "url": "https://sampatakumar.github.io/",
+      "id": "https://sampatakumar.github.io/"
+    },
+    {
+      "platform": "webapp",
+      "name": "Resume",
+      "url": "https://sampatakumar.github.io/resume/index.html",
+      "id": "https://sampatakumar.github.io/resume/index.html"
+    },
+    {
+      "platform": "webapp",
+      "name": "EduConnect",
+      "url": "https://educonnect25.vercel.app/",
+      "id": "https://educonnect25.vercel.app/"
+    },
+    {
+      "platform": "webapp",
+      "name": "RGITX",
+      "url": "https://rgitx.vercel.app/",
+      "id": "https://rgitx.vercel.app/"
+    }
+  ]
+}
