@@ -23,16 +23,6 @@
       "name": "Resume",
       "url": "resume/index.html",
       "description": "View my Resume"
-    },
-    {
-      "name": "EduConnect",
-      "url": "https://educonnect25.vercel.app/",
-      "description": "Student Collaboration Platform"
-    },
-    {
-      "name": "RGITX",
-      "url": "https://rgitx.vercel.app/",
-      "description": "Lab Programs Interface"
     }
   ],
   "related_applications": [
