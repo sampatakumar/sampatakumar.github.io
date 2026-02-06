@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>Small Projects | Sampatakumar S V</title>
+    <meta
+      name="description"
+      content="A collection of small projects and experiments by Sampatakumar S V."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+
+    <!-- Scripts -->
+    <script src="../script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="custom-cursor"></div>
+    <!-- Navbar -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="../index.html">SV</a>
+
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="nav-menu">
+          <a href="../index.html#about">About</a>
+          <a href="../index.html#skills">Skills</a>
+          <a href="../index.html#experience">Projects</a>
+          <a href="#" class="active">Small Projects</a>
+          <a href="../index.html#education">Education</a>
+          <a href="../index.html#certifications">Certifications</a>
+          <a href="../resume/index.html" target="_blank">Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" style="padding-bottom: 2rem; min-height: auto">
+        <div class="container">
+          <h1 style="text-align: center">
+            Small <span class="text-gradient">Projects</span>
+          </h1>
+          <p class="lead" style="text-align: center; margin: 0 auto">
+            Experiments, mini-tools, and fun creations.
+          </p>
+        </div>
+      </section>
+
+      <!-- Projects Grid -->
+      <section class="section">
+        <div class="container">
+          <div class="card-grid">
+            <!-- Project: Cursor Animation -->
+            <a
+              href="smallprojects/cursoranimation/index.html"
+              class="project-card tilt-card"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--bg-card);
+                border: 1px solid var(--border);
+              "
+            >
+              <!-- Using a generated placeholder or icon if no image exists, or standard styling -->
+              <div style="text-align: center; padding: 2rem">
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem">
+                  Cursor Animation
+                </h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted)">
+                  Interactive JS cursor effect
+                </p>
+              </div>
+              <div class="project-overlay">
+                <h3>Cursor Animation</h3>
+                <p>
+                  A custom JavaScript cursor with trailing effects and
+                  animations.
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          © <span id="y"></span> Sampatakumar S V • Built with
+          <span class="text-gradient">Github Page</span>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

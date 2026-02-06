@@ -1,0 +1,4 @@
+/* Specific overrides for the projects page */
+.hero {
+  padding-top: calc(var(--nav-height) + 4rem);
+}
