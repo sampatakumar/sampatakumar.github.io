@@ -18,13 +18,6 @@
       "type": "image/png"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "Resume",
-      "url": "resume/index.html",
-      "description": "View my Resume"
-    }
-  ],
   "related_applications": [
     {
       "platform": "webapp",
