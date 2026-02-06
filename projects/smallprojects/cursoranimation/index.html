@@ -41,6 +41,41 @@
       document.addEventListener("mouseout", () => {
         cursor.style.display = "none";
       });
+
+      // Mobile Touch Support
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          let x = e.touches[0].pageX;
+          let y = e.touches[0].pageY;
+          cursor.style.left = x + "px";
+          cursor.style.top = y + "px";
+          cursor.style.display = "block";
+
+          clearTimeout(timeout);
+          timeout = setTimeout(mouseStopped, 1000);
+        },
+        { passive: true },
+      );
+
+      document.addEventListener(
+        "touchstart",
+        (e) => {
+          let x = e.touches[0].pageX;
+          let y = e.touches[0].pageY;
+          cursor.style.left = x + "px";
+          cursor.style.top = y + "px";
+          cursor.style.display = "block";
+
+          clearTimeout(timeout);
+          timeout = setTimeout(mouseStopped, 1000);
+        },
+        { passive: true },
+      );
+
+      document.addEventListener("touchend", () => {
+        cursor.style.display = "none";
+      });
     </script>
   </body>
 </html>
