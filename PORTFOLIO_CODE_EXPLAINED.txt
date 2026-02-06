@@ -1,0 +1,78 @@
+PORTFOLIO CODE EXPLANATION & WALKTHROUGH
+========================================
+
+This document explains the code and technologies used to build your portfolio website. The project uses a modern, "vanilla" stack (HTML, CSS, JavaScript) without heavy frameworks, complying with the "Glassmorphism" aesthetic you requested.
+
+1. TECHNOLOGY STACK
+-------------------
+• HTML5: Provides the structure and semantic meaning of the content.
+• CSS3 (Custom): Handles the visual styling, layout, and animations. No external CSS frameworks were used, giving us full control.
+• JavaScript (ES6+): Adds interactivity, animations, and dynamic behavior.
+
+2. VISUAL DESIGN: THE "GLASSMORPHISM" STYLE
+-------------------------------------------
+The design follows the "Glassmorphism" trend, characterized by translucency and blur.
+
+• How it works in code:
+  In `styles.css`, the `.glass-card` class uses a special property called `backdrop-filter`.
+  
+  .glass-card {
+      background: rgba(17, 24, 39, 0.6); /* Semi-transparent dark blue */
+      backdrop-filter: blur(10px);       /* Blurs whatever is behind the card */
+      border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+  }
+
+• Dynamic Background:
+  The background isn't a static image. It uses CSS radial gradients that move! 
+  The JavaScript tracks your mouse position and updates CSS variables (--x, --y).
+  
+  body::after {
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+      transform: translate(var(--x), var(--y)); /* Moves with the mouse */
+  }
+
+3. CORE STRUCTURE (HTML)
+------------------------
+The `index.html` file is organized into semantic sections.
+
+• SEO (Search Engine Optimization):
+  We included `<meta>` tags for description, keywords, and Open Graph data so search engines and social media platforms understand your site.
+
+• Navigation:
+  The `<header class="nav">` stays fixed at the top (`position: fixed`). On mobile, it transforms into a slide-out drawer.
+
+• Sections:
+  - Hero: The top section with your photo and intro.
+  - About, Skills, Projects, Education: Standard content sections.
+  
+4. INTERACTIVITY (JAVASCRIPT)
+-----------------------------
+The `script.js` file makes the site feel "alive".
+
+• 3D Tilt Effect:
+  The cards tilt when you move your mouse over them.
+  - Logic: The script calculates where your mouse is relative to the center of the card.
+  - Math: simpler version -> If mouse is on the left, rotate the card to the left.
+  
+  el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+• Scroll Animations:
+  Items fade in as you scroll down.
+  - Logic: Uses the `IntersectionObserver` API efficiently detects when an element enters the screen view. When it does, we add the class `.revealed`.
+
+• Typewriter Effect:
+  The text in the Hero section types itself out character by character.
+  - Logic: A recursive function `type()` adds one letter, waits 150ms, then calls itself again.
+
+5. RESPONSIVENESS
+-----------------
+The site adapts to mobile phones using CSS Media Queries.
+
+• @media (max-width: 768px):
+  This block in `styles.css` contains rules that only apply to screens smaller than 768px (like phones).
+  - It stacks the grid columns (1 column instead of 2).
+  - It moves the navigation into a "hamburger" menu.
+
+SUMMARY
+-------
+This codebase provides a high-performance, visually stunning portfolio without the bloat of heavy libraries. It showcases your skills not just by *listing* them, but by *demonstrating* them in the code itself (custom CSS, DOM manipulation, responsive design).
