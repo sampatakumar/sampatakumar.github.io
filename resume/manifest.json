@@ -1,6 +1,6 @@
 {
   "name": "Sampatakumar S V",
-  "short_name": "Sampatakumar,sampatakumar venkatapur, sampatakumar s venkatapur",
+  "short_name": "Resume",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -8,23 +8,17 @@
   "description": "Frontend Developer portfolio of Sampatakumar S V. React, JavaScript, modern web development.",
   "icons": [
     {
-      "src": "assets/favicon.png",
+      "src": "../assets/favicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/favicon.png",
+      "src": "../assets/favicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "Portfolio Home",
-      "url": "../index.html",
-      "description": "Back to Portfolio"
-    }
-  ],
+  "shortcuts": [],
   "related_applications": [
     {
       "platform": "webapp",
