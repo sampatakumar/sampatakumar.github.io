@@ -423,10 +423,57 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
       }
+      /* Custom Mouse Cursor */
+      body {
+        cursor: none;
+      }
+
+      .custom-cursor {
+        z-index: 9999;
+        position: fixed;
+        background: #2696e8;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        pointer-events: none;
+        box-shadow:
+          0 0 20px #2696e8,
+          0 0 60px #2696e8,
+          0 0 100px #2696e8;
+        animation: colors 5s infinite;
+        transform: translate(-50%, -50%);
+        display: none;
+        left: 0;
+        top: 0;
+      }
+
+      @keyframes colors {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+
+      .custom-cursor:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        background: #2696e8;
+        border-radius: 50%;
+        opacity: 0.2;
+        transform: translate(-50%, -50%);
+        transition: 0.1s;
+      }
     </style>
   </head>
 
   <body data-theme="light">
+    <div class="custom-cursor"></div>
     <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
 
     <main class="container">
@@ -645,6 +692,31 @@
         document.body.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
       });
+
+      /* Custom Cursor Logic */
+      const cursorCursor = document.querySelector(".custom-cursor");
+      var cursorTimeout;
+
+      if (cursorCursor) {
+        document.addEventListener("mousemove", (e) => {
+          let x = e.clientX;
+          let y = e.clientY;
+          cursorCursor.style.left = x + "px";
+          cursorCursor.style.top = y + "px";
+          cursorCursor.style.display = "block";
+
+          function mouseStopped() {
+            cursorCursor.style.display = "none";
+          }
+
+          clearTimeout(cursorTimeout);
+          cursorTimeout = setTimeout(mouseStopped, 1000);
+        });
+
+        document.addEventListener("mouseout", () => {
+          cursorCursor.style.display = "none";
+        });
+      }
     </script>
   </body>
 </html>
