@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>Project Details | Sampatakumar S V</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .detail-container {
+            padding-top: calc(var(--nav-height) + 2rem);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .project-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .code-editor-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: 80vh;
+        }
+
+        .code-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .readme-section {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-y: auto;
+            color: var(--text-muted);
+        }
+
+        .readme-section h1,
+        .readme-section h2,
+        .readme-section h3 {
+            color: var(--text-main);
+            margin-top: 1.5rem;
+        }
+
+        .readme-section code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .readme-section pre {
+            background: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .code-view {
+            width: 100%;
+            height: 100%;
+            background: #0d1117;
+            color: #c9d1d9;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            resize: none;
+            font-size: 14px;
+            line-height: 1.5;
+            outline: none;
+        }
+
+        @media (max-width: 900px) {
+            .code-editor-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .code-section,
+            .readme-section {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="custom-cursor"></div>
+
+    <header class="nav">
+        <div class="container nav-inner">
+            <a class="brand" href="../index.html">SV</a>
+            <a href="index.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                ← Back to Projects
+            </a>
+        </div>
+    </header>
+
+    <main class="detail-container">
+        <div class="project-header">
+            <h1 id="projectTitle" class="project-title">Loading...</h1>
+            <p class="lead" id="projectDesc">Please wait while we fetch the project details.</p>
+
+            <div class="action-bar">
+                <a id="demoBtn" href="#" target="_blank" class="btn btn-primary">View Live Demo</a>
+                <a href="index.html" class="btn btn-secondary">All Projects</a>
+            </div>
+        </div>
+
+        <div class="code-editor-layout">
+            <!-- Validation / Code Block -->
+            <div class="code-section">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('html')">HTML</button>
+                    <button class="tab-btn" onclick="showTab('css')">CSS</button>
+                    <button class="tab-btn" onclick="showTab('js')">JS</button>
+                </div>
+
+                <textarea id="codeViewer" class="code-view" readonly></textarea>
+            </div>
+
+            <!-- Readme Block -->
+            <div id="readmeViewer" class="readme-section">
+                <h3>README.md</h3>
+                <div id="readmeContent">
+                    Loading README...
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="detail.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

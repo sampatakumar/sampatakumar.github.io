@@ -1,6 +1,30 @@
 /* Specific overrides for the projects page */
 .hero {
-  padding-top: calc(var(--nav-height) + 4rem);
+  padding-top: calc(var(--nav-height) + 2rem);
+  padding-bottom: 2rem;
+  min-height: auto;
+}
+
+/* Override Grid for Small Projects */
+.card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  aspect-ratio: 1;
+  /* Square cards for small projects seem appropriate, or we can keep 16/9 but smaller */
+  border-radius: 12px;
+}
+
+/* Make title smaller in the overlay */
+.project-overlay h3 {
+  font-size: 1.2rem;
+}
+
+.project-overlay p {
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 /* Cursor Preview Styles */
@@ -28,10 +52,12 @@
 }
 
 @keyframes floatCursor {
+
   0%,
   100% {
     transform: translate(0, 0);
   }
+
   50% {
     transform: translate(20px, -20px);
   }

@@ -1,86 +1,74 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" />
-    <title>Small Projects | Sampatakumar S V</title>
-    <meta
-      name="description"
-      content="A collection of small projects and experiments by Sampatakumar S V."
-    />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Small Projects | Sampatakumar S V</title>
+  <meta name="description" content="A collection of small projects and experiments by Sampatakumar S V." />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+    rel="stylesheet" />
 
-    <!-- Scripts -->
-    <script src="../script.js" defer></script>
-  </head>
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
 
-  <body>
-    <div class="custom-cursor"></div>
-    <!-- Navbar -->
-    <header class="nav">
-      <div class="container nav-inner">
-        <a class="brand" href="../index.html">SV</a>
+  <!-- Scripts -->
+  <script src="../script.js" defer></script>
+</head>
 
-        <button
-          class="nav-toggle"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-        >
-          <span></span><span></span><span></span>
-        </button>
+<body>
+  <div class="custom-cursor"></div>
+  <!-- Navbar -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="../index.html">SV</a>
 
-        <nav class="nav-menu">
-          <a href="../index.html#about">About</a>
-          <a href="../index.html#skills">Skills</a>
-          <a href="../index.html#experience">Projects</a>
-          <a href="#" class="active">Small Projects</a>
-          <a href="../index.html#education">Education</a>
-          <a href="../index.html#certifications">Certifications</a>
-          <a href="../resume/index.html" target="_blank">Resume</a>
-        </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#experience">Projects</a>
+        <a href="#" class="active">Small Projects</a>
+        <a href="../index.html#education">Education</a>
+        <a href="../index.html#certifications">Certifications</a>
+        <a href="../resume/index.html" target="_blank">Resume</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" style="padding-bottom: 2rem; min-height: auto">
+      <div class="container">
+        <h1 style="text-align: center">
+          Small <span class="text-gradient">Projects</span>
+        </h1>
+        <p class="lead" style="text-align: center; margin: 0 auto">
+          Experiments, mini-tools, and fun creations.
+        </p>
       </div>
-    </header>
+    </section>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero" style="padding-bottom: 2rem; min-height: auto">
-        <div class="container">
-          <h1 style="text-align: center">
-            Small <span class="text-gradient">Projects</span>
-          </h1>
-          <p class="lead" style="text-align: center; margin: 0 auto">
-            Experiments, mini-tools, and fun creations.
-          </p>
-        </div>
-      </section>
-
-      <!-- Projects Grid -->
-      <section class="section">
-        <div class="container">
-          <div class="card-grid">
-            <!-- Project: Cursor Animation -->
-            <a
-              href="smallprojects/cursoranimation/index.html"
-              class="project-card tilt-card"
-              style="background: #000; position: relative; overflow: hidden"
-            >
-              <!-- CSS Preview of the Cursor Animation -->
-              <div
-                class="cursor-preview-container"
-                style="
+    <!-- Projects Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="card-grid">
+          <!-- Project: Cursor Animation -->
+          <a href="project-detail.html?project=cursoranimation&title=Cursor%20Animation" class="project-card tilt-card"
+            style="background: #000; position: relative; overflow: hidden">
+            <!-- CSS Preview of the Cursor Animation -->
+            <div class="cursor-preview-container" style="
                   width: 100%;
                   height: 100%;
                   display: flex;
@@ -88,50 +76,88 @@
                   justify-content: center;
                   position: absolute;
                   inset: 0;
-                "
-              >
-                <div class="mini-cursor"></div>
-                <div class="mini-trail"></div>
-                <div
-                  class="mini-trail"
-                  style="
+                ">
+              <div class="mini-cursor"></div>
+              <div class="mini-trail"></div>
+              <div class="mini-trail" style="
                     animation-delay: 0.1s;
                     opacity: 0.6;
                     transform: translate(-10px, 5px) scale(0.8);
-                  "
-                ></div>
-                <div
-                  class="mini-trail"
-                  style="
+                  "></div>
+              <div class="mini-trail" style="
                     animation-delay: 0.2s;
                     opacity: 0.3;
                     transform: translate(-20px, 10px) scale(0.6);
-                  "
-                ></div>
-              </div>
+                  "></div>
+            </div>
 
-              <!-- Overlay -->
-              <div class="project-overlay">
-                <h3>Cursor Animation</h3>
-                <p>
-                  A custom JavaScript cursor with trailing effects and
-                  animations.
-                </p>
+            <!-- Overlay -->
+            <div class="project-overlay">
+              <h3>Cursor Animation</h3>
+              <p>
+                A custom JavaScript cursor with trailing effects and
+                animations.
+              </p>
+            </div>
+          </a>
+
+
+          <!-- Project: Glassy Navbar -->
+          <a href="project-detail.html?project=Glassy%20Navbar&title=Glassy%20Navbar" class="project-card tilt-card"
+            style="background: #111; position: relative; overflow: hidden">
+            <!-- CSS Preview of the Navbar -->
+            <div class="navbar-preview-container" style="
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle at 50% 50%, #333 1px, transparent 1px);
+                background-size: 20px 20px;
+                opacity: 0.3;
+              ">
+              <div style="
+                width: 120px;
+                height: 30px;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(4px);
+                border-radius: 50px;
+                border: 1px solid rgba(255,255,255,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+              ">
+                <div style="width: 20px; height: 4px; background: rgba(255,255,255,0.6); border-radius: 2px;"></div>
+                <div style="width: 20px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
+                <div style="width: 20px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px;"></div>
               </div>
-            </a>
-          </div>
+            </div>
+
+            <!-- Overlay -->
+            <div class="project-overlay">
+              <h3>Glassy Navbar</h3>
+              <p>
+                A modern, responsive navigation bar with glassmorphism effects and animations.
+              </p>
+            </div>
+          </a>
         </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>
-          © <span id="y"></span> Sampatakumar S V • Built with
-          <span class="text-gradient">Github Page</span>
-        </p>
       </div>
-    </footer>
-  </body>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        © <span id="y"></span> Sampatakumar S V • Built with
+        <span class="text-gradient">Github Page</span>
+      </p>
+    </div>
+  </footer>
+</body>
+
 </html>
