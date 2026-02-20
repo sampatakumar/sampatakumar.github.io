@@ -1,38 +1,29 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Cursor animation</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <div class="cursor"></div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Cursor animation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../../../styles.css" />
+  <script src="../../../script.js" defer></script>
+</head>
 
-    <script>
-      const cursor = document.querySelector(".cursor");
-      var timeout;
+<body>
+  <h1>Cursor animation</h1>
 
-      //mousestopped hide
-      function mouseStopped() {
-        cursor.style.display = "none";
-      }
+  <div class="cursor-head"></div>
 
-      document.addEventListener("mousemove", (e) => {
-        let x = e.pageX;
-        let y = e.pageY;
-        cursor.style.left = x + "px";
-        cursor.style.top = y + "px";
-        cursor.style.display = "block";
+  <script>
+    const text = document.querySelector("h1");
+    text.innerHTML = text.innerText
+      .split("")
+      .map((char, i) => `<span style="--i:${i}">${char}</span>`)
+      .join("");
 
-        clearTimeout(timeout);
-        timeout = setTimeout(mouseStopped, 1000);
-      });
+    // Global script.js now handles the trail effect, 
+    // but we maintain the h1 animation logic here.
+  </script>
+</body>
 
-      //effect on mouseout
-      document.addEventListener("mouseout", () => {
-        cursor.style.display = "none";
-      });
-    </script>
-  </body>
 </html>

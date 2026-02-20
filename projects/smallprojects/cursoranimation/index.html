@@ -1,81 +1,45 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Cursor animation</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <h1>Cursor animation</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Cursor Animation Demo | Sampatakumar S V</title>
+  <link rel="stylesheet" href="../../../styles.css" />
+  <script src="../../../script.js" defer></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+      font-family: Inter, sans-serif;
+    }
 
-    <div class="cursor"></div>
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
 
-    <script>
-      const text = document.querySelector("h1");
-      text.innerHTML = text.innerText
-        .split("")
-        .map((char, i) => `<span style="--i:${i}">${char}</span>`)
-        .join("");
+    .back-link {
+      color: #888;
+      text-decoration: none;
+    }
 
-      const cursor = document.querySelector(".cursor");
-      var timeout;
+    .back-link:hover {
+      color: #fff;
+    }
+  </style>
+</head>
 
-      //mousestopped hide
-      function mouseStopped() {
-        cursor.style.display = "none";
-      }
+<body>
+  <div class="cursor-head"></div>
+  <h1>Cursor Animation</h1>
+  <p>This page now uses the unified portfolio trail.</p>
+  <a href="../../../index.html" class="back-link">← Back to Home</a>
+</body>
 
-      document.addEventListener("mousemove", (e) => {
-        let x = e.pageX;
-        let y = e.pageY;
-        cursor.style.left = x + "px";
-        cursor.style.top = y + "px";
-        cursor.style.display = "block";
-
-        clearTimeout(timeout);
-        timeout = setTimeout(mouseStopped, 1000);
-      });
-
-      //effect on mouseout
-      document.addEventListener("mouseout", () => {
-        cursor.style.display = "none";
-      });
-
-      // Mobile Touch Support
-      document.addEventListener(
-        "touchmove",
-        (e) => {
-          let x = e.touches[0].pageX;
-          let y = e.touches[0].pageY;
-          cursor.style.left = x + "px";
-          cursor.style.top = y + "px";
-          cursor.style.display = "block";
-
-          clearTimeout(timeout);
-          timeout = setTimeout(mouseStopped, 1000);
-        },
-        { passive: true },
-      );
-
-      document.addEventListener(
-        "touchstart",
-        (e) => {
-          let x = e.touches[0].pageX;
-          let y = e.touches[0].pageY;
-          cursor.style.left = x + "px";
-          cursor.style.top = y + "px";
-          cursor.style.display = "block";
-
-          clearTimeout(timeout);
-          timeout = setTimeout(mouseStopped, 1000);
-        },
-        { passive: true },
-      );
-
-      document.addEventListener("touchend", () => {
-        cursor.style.display = "none";
-      });
-    </script>
-  </body>
 </html>
