@@ -78,6 +78,33 @@
       --muted: #9ca3af;
       --border: #1f2937;
       --accent: #60a5fa;
+      
+        h3{
+          color: #f1e9e9;
+        }
+    }
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --text: #000000;
+      --muted: #3803f9;
+      --border: #102ef0;
+      --accent: #60a5fa;
+        h1,h3{
+          color: #000;
+        }
+        h2{
+          color: #00000093;
+        }
+        p{
+          color: rgba(40, 9, 112, 0.56);
+        }
+       strong{
+        color: rgb(0, 0, 0);
+       }
+       a{
+        color: #102ef0;
+        list-style: none;
+       }
     }
 
     * {
@@ -231,7 +258,7 @@
           #e5e7eb 25%,
           #f3f4f6 37%,
           #e5e7eb 63%);
-      animation: shimmer 1.4s infinite linear;
+      animation: shimmer 0.5s infinite linear;
     }
 
     [data-theme="dark"] .skeleton {
@@ -490,6 +517,15 @@
             <a href="https://addons.mozilla.org/en-US/firefox/addon/glassy-home/" target="_blank">Try it out</a>
           </div>
         </div>
+        <div class="project">
+          <h3>Smart Skill Hub</h3>
+          <p>
+            Built with React Native and Expo, the site provides a centralized, mobile-optimized environment for managing both professional growth and daily educational workflows.
+          </p>
+          <div class="actions">
+            <a href="https://expo-smart-skill-hub.vercel.app/" target="_blank">Try it out</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -497,7 +533,7 @@
       <h2>Education</h2>
       <div class="divider"></div>
       <p>
-        <strong>Rajiv Gandhi Institute of Technology, Bangalore</strong><br />Bachelor’s Degree (Student)
+        <strong>Rajiv Gandhi Institute of Technology, Bangalore</strong> (Student)
       </p>
     </section>
 
