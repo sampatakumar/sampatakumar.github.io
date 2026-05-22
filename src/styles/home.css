@@ -1,0 +1,27 @@
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #030e6f transparent;
+
+ 
+}
+
+.btn-primary {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center; 
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #4b5563;
+  background-color: transparent;
+  color: #f3f4f6;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  
+  margin-bottom: 1rem;
+}
+.btn-primary:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  box-shadow: 4px 4px 0 #4b5563;
+
+}
