@@ -1,8 +1,24 @@
+import { useState, useEffect } from "react"
 import AppRoute from "./routes/app.route"
 import GooeyNav from "./components/GooeyNav.js"
 import LightRays from "./components/LightRays.tsx"
+import Loading from "./pages/loading"
 
 export function App() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setTimeout(() => setLoading(false), 2000)
+    }
+
+    if (document.readyState === "complete") {
+      handleLoad()
+    } else {
+      window.addEventListener("load", handleLoad)
+      return () => window.removeEventListener("load", handleLoad)
+    }
+  }, [])
 
   const items = [
     { label: "Home", href: "#home" },
@@ -11,6 +27,10 @@ export function App() {
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },
   ]
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <div className="relative min-h-screen overflow-x-hidden text-white">
