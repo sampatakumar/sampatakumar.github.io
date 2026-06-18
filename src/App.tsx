@@ -9,7 +9,7 @@ export function App() {
 
   useEffect(() => {
     const handleLoad = () => {
-      setTimeout(() => setLoading(false), 2000)
+      setTimeout(() => setLoading(false), 3500)
     }
 
     if (document.readyState === "complete") {

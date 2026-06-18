@@ -167,6 +167,36 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     return () => resizeObserver.disconnect();
   }, [activeIndex]);
 
+  // Scroll Spy: Update active index based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      let newActiveIndex = activeIndex;
+      // Loop backwards to find the deepest section that is currently in view
+      for (let i = items.length - 1; i >= 0; i--) {
+        const id = items[i].href.substring(1); // Remove the '#'
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section's top is in the top 40% of the viewport, consider it active
+          if (rect.top <= window.innerHeight * 0.4) {
+            newActiveIndex = i;
+            break;
+          }
+        }
+      }
+
+      if (newActiveIndex !== activeIndex) {
+        setActiveIndex(newActiveIndex);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Check once on mount just in case the page is loaded already scrolled
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [items, activeIndex]);
+
   return (
     <div className="gooey-nav-container" ref={containerRef}>
       <nav>
