@@ -1,7 +1,24 @@
 import ProfileCard from '../components/ProfileCard.tsx'
 import ScrollReveal from '../components/ScrollReveal.tsx'
 import ProjectCarousel from '../components/ProjectCarousel.tsx'
-import { FaGithub, FaLinkedin, FaTerminal, FaFileDownload, FaEnvelope, FaExternalLinkAlt, FaWhatsapp } from "react-icons/fa"
+import {
+  FaGithub,
+  FaLinkedin,
+  FaTerminal,
+  FaFileDownload,
+  FaEnvelope,
+  FaExternalLinkAlt,
+  FaWhatsapp,
+  FaLaptopCode,
+  FaRocket,
+  FaBrain,
+  FaBolt,
+  FaLayerGroup,
+  FaShieldAlt,
+  FaGraduationCap,
+  FaCheckCircle
+} from "react-icons/fa"
+import { motion } from "motion/react"
 import { useEffect, useState } from "react";
 import BlurText from "../components/BlurText"
 import TextType from '../components/TextType.tsx';
@@ -218,28 +235,259 @@ export default function Home() {
       {/* ================= ABOUT ================= */}
       <section
         id="about"
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-24"
+        className="min-h-screen px-6 lg:px-20 py-24 flex flex-col justify-center items-center"
       >
-        <ScrollReveal textClassName="text-4xl md:text-5xl font-extrabold tracking-wide text-center text-gradient-emerald mb-16">
-          About Me
-        </ScrollReveal>
+        <div className="w-full max-w-7xl mx-auto space-y-12">
+          
+          {/* Header */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wider uppercase">
+              <FaLaptopCode /> Passion · Engineering · Innovation
+            </div>
+            <ScrollReveal textClassName="text-4xl md:text-5xl font-extrabold tracking-tight text-gradient-emerald">
+              About Me & Engineering Vision
+            </ScrollReveal>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Transforming complex technical ideas into resilient, production-ready applications with modern web and AI frameworks.
+            </p>
+          </div>
 
-        <div className="w-full max-w-4xl mx-auto neomorph-card neomorph-card-hover p-8 md:p-12 rounded-3xl space-y-6 text-center text-base md:text-lg text-foreground/80 leading-relaxed">
-          <BlurText
-            text="I am Sampatakumar, a Computer Science Engineering student passionate about Software Development, Full-Stack Web Engineering, and Artificial Intelligence. I take pride in building scalable, resilient, and responsive digital products."
-            delay={200}
-            animateBy="words"
-          />
-          <BlurText
-            text="My core tech stack spans React.js, TypeScript, Node.js, Express, Firebase, and Supabase. I focus on clean software architecture, component-driven UI design, and reliable backend services."
-            delay={400}
-            animateBy="words"
-          />
-          <BlurText
-            text="Driven by curiosity and high technical standards, I continuously turn complex ideas into refined, impactful applications. I am seeking opportunities to bring value to innovative engineering teams."
-            delay={600}
-            animateBy="words"
-          />
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            {/* Main Narrative Bento Card (Span 2) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="lg:col-span-2 neomorph-card neomorph-card-hover p-6 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 relative overflow-hidden group"
+            >
+              <div className="space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-border/40">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold tracking-wide uppercase">
+                      Developer Bio & Philosophy
+                    </span>
+                  </div>
+                  <span className="font-mono text-[11px] text-muted-foreground">bio.ts</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground leading-snug">
+                  Building High-Impact Web Applications & AI-Driven Software
+                </h3>
+
+                <p className="text-foreground/85 text-sm sm:text-base leading-relaxed">
+                  I am <strong className="text-emerald-600 dark:text-emerald-400">Sampatakumar V</strong>, a Computer Science Engineering student passionate about software engineering, full-stack architecture, and machine intelligence. I specialize in turning ambitious project concepts into polished, responsive, and resilient digital solutions.
+                </p>
+
+                <p className="text-foreground/85 text-sm sm:text-base leading-relaxed">
+                  My experience ranges from building autonomous AI-curated newspapers and AI-assisted ATS resume platforms to real-time academic collaboration networks and direct agriculture marketplaces. I take pride in clean code, type safety, modular design systems, and delightful tactile user interfaces.
+                </p>
+
+                {/* Key Highlights Row */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3">
+                  <div className="neomorph-inset p-3.5 rounded-2xl flex flex-col gap-1">
+                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                      <FaBolt /> Rapid Prototyping
+                    </div>
+                    <span className="text-xs text-muted-foreground">From specification to deployed production apps with React & TypeScript.</span>
+                  </div>
+                  <div className="neomorph-inset p-3.5 rounded-2xl flex flex-col gap-1">
+                    <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold text-xs">
+                      <FaBrain /> AI-Native Workflows
+                    </div>
+                    <span className="text-xs text-muted-foreground">Deep integration of Groq, LangChain, local LLMs, and prompt pipelines.</span>
+                  </div>
+                  <div className="neomorph-inset p-3.5 rounded-2xl flex flex-col gap-1">
+                    <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400 font-bold text-xs">
+                      <FaShieldAlt /> Resilient Architectures
+                    </div>
+                    <span className="text-xs text-muted-foreground">Scalable REST APIs, cloud databases, client-side state, and 100% uptime.</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tag Cloud */}
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-border/40">
+                {[
+                  "React 19 & Next.js",
+                  "TypeScript",
+                  "Node.js & Express",
+                  "AI & LLM Integration",
+                  "Tailwind CSS",
+                  "Firebase & Supabase",
+                  "GitHub Actions CI/CD"
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="neomorph-pill text-xs font-mono px-3 py-1 rounded-lg text-emerald-600 dark:text-emerald-400 font-medium"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Core Pillars Bento Card (Span 1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6"
+            >
+              <div>
+                <div className="flex items-center justify-between pb-3 border-b border-border/40 mb-4">
+                  <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                    <FaLayerGroup /> Engineering DNA
+                  </span>
+                  <span className="text-xs font-mono text-muted-foreground">04 Pillars</span>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      title: "Clean Code & Modularity",
+                      desc: "Strict TypeScript types, predictable state flow, and component-driven reuse.",
+                      icon: <FaCheckCircle className="text-emerald-500 shrink-0 mt-0.5" />
+                    },
+                    {
+                      title: "Sub-Second UX Performance",
+                      desc: "Hardware-accelerated animations, zero bundle waste, and fluid 60fps micro-interactions.",
+                      icon: <FaBolt className="text-amber-500 shrink-0 mt-0.5" />
+                    },
+                    {
+                      title: "Real-World Problem Solving",
+                      desc: "Designing tools that empower students, farmers, and developers in their daily workflows.",
+                      icon: <FaRocket className="text-cyan-500 shrink-0 mt-0.5" />
+                    },
+                    {
+                      title: "Continuous Exploration",
+                      desc: "Always experimenting with cutting-edge web specs, mobile apps with Expo, and agentic AI.",
+                      icon: <FaBrain className="text-violet-500 shrink-0 mt-0.5" />
+                    }
+                  ].map((pillar, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3 rounded-2xl neomorph-inset">
+                      {pillar.icon}
+                      <div>
+                        <h4 className="text-sm font-bold text-foreground">{pillar.title}</h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{pillar.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Status pill */}
+              <div className="pt-2">
+                <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span className="font-medium">Currently building & exploring next-gen web technology</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Academic & Journey Card (Span 1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider pb-3 border-b border-border/40">
+                  <FaGraduationCap className="text-sm" /> Academic & Foundations
+                </div>
+
+                <h4 className="text-xl font-bold text-foreground">Computer Science Engineering</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  Strong theoretical foundation in Data Structures, Object-Oriented System Design, Operating Systems, Computer Networks, and Modern Software Engineering methodologies.
+                </p>
+
+                <div className="space-y-2 pt-2">
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-muted-foreground">Production Code Repos:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">20+</span>
+                  </div>
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-muted-foreground">Full-Stack Live Apps:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">12+</span>
+                  </div>
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-muted-foreground">Development Mindset:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Continuous Learner</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="/Sampatakumar.pdf"
+                download
+                className="neomorph-btn w-full py-2.5 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2 hover:scale-105 transition-all"
+              >
+                <FaFileDownload /> Download Verified Resume
+              </a>
+            </motion.div>
+
+            {/* Interactive Terminal / Code Sandbox Card (Span 2) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="lg:col-span-2 neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4 font-mono text-xs"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-border/40">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  <span className="ml-2 text-muted-foreground text-[11px] flex items-center gap-1">
+                    <FaTerminal className="text-emerald-500" /> profile@sampatakumar: ~/manifesto.json
+                  </span>
+                </div>
+                <span className="neomorph-pill text-[10px] text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">JSON</span>
+              </div>
+
+              <div className="neomorph-inset p-4 rounded-2xl overflow-x-auto text-left leading-relaxed text-[12px]">
+                <p className="text-foreground/80">&#123;</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"developer"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Sampatakumar V"</span>,</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"focus"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Full-Stack Web Engineering & Intelligent Systems"</span>,</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"coreStrengths"</span>: [<span className="text-emerald-600 dark:text-emerald-300">"Scalable Architecture"</span>, <span className="text-emerald-600 dark:text-emerald-300">"AI Tooling"</span>, <span className="text-emerald-600 dark:text-emerald-300">"Modern UX"</span>],</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"philosophy"</span>: <span className="text-amber-600 dark:text-amber-300">"Turning complex engineering challenges into seamless user reality."</span>,</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"openTo"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Impactful software engineering roles, collaboration & open-source"</span></p>
+                <p className="text-foreground/80">&#125;</p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                <span className="text-muted-foreground text-[11px]">Ready to build something exceptional together?</span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="mailto:sampatakumarsv@gmail.com"
+                    className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all flex items-center gap-1.5"
+                  >
+                    <FaEnvelope /> Email Me
+                  </a>
+                  <a
+                    href="https://wa.me/919380395607"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all flex items-center gap-1.5"
+                  >
+                    <FaWhatsapp /> Quick Chat
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+
         </div>
       </section>
 
