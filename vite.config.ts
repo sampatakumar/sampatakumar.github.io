@@ -12,4 +12,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-animation": ["motion", "gsap"],
+          "vendor-icons": ["react-icons", "lucide-react", "@tabler/icons-react"],
+        },
+      },
+    },
+  },
 })

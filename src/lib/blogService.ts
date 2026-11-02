@@ -228,7 +228,7 @@ export const savePostsToStorage = (posts: BlogPost[]): void => {
 }
 
 // Static LocalStorage Management (Pure Client-Side / GitHub Pages)
-export const getAuthorDetails = (author?: any) => {
+export const getAuthorDetails = (author?: { name?: string; avatar?: string; role?: string }) => {
   const defaultAuthor = {
     name: 'Sampatakumar V',
     avatar: '/avatar.png',
@@ -258,7 +258,7 @@ export const deletePostAsync = async (id: string): Promise<void> => {
   return Promise.resolve()
 }
 
-export const togglePublishStatusAsync = async (id: string, _currentStatus: string): Promise<BlogPost | undefined> => {
+export const togglePublishStatusAsync = async (id: string): Promise<BlogPost | undefined> => {
   return Promise.resolve(togglePublishStatus(id))
 }
 

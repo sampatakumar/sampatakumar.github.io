@@ -33,8 +33,22 @@ export default function Blog() {
   const [sortBy, setSortBy] = useState<'latest' | 'popular' | 'likes'>('latest')
   const [activePost, setActivePost] = useState<BlogPost | null>(null)
   const [copiedLink, setCopiedLink] = useState(false)
-  const [userLikes, setUserLikes] = useState<Record<string, boolean>>({})
-  const [userBookmarks, setUserBookmarks] = useState<Record<string, boolean>>({})
+  const [userLikes, setUserLikes] = useState<Record<string, boolean>>(() => {
+    try {
+      const raw = localStorage.getItem('blog_user_likes')
+      return raw ? JSON.parse(raw) : {}
+    } catch {
+      return {}
+    }
+  })
+  const [userBookmarks, setUserBookmarks] = useState<Record<string, boolean>>(() => {
+    try {
+      const raw = localStorage.getItem('blog_user_bookmarks')
+      return raw ? JSON.parse(raw) : {}
+    } catch {
+      return {}
+    }
+  })
   const [commentInput, setCommentInput] = useState('')
   const [comments, setComments] = useState<Record<string, { id: string; author: string; text: string; date: string }[]>>({
     '1': [
@@ -51,13 +65,6 @@ export default function Blog() {
     fetchPostsAsync().then((allPosts) => {
       setPosts(allPosts.filter((p) => p.status === 'published'))
     })
-
-    // Load user likes & bookmarks from localStorage
-    const localLikes = localStorage.getItem('blog_user_likes')
-    if (localLikes) setUserLikes(JSON.parse(localLikes))
-
-    const localBookmarks = localStorage.getItem('blog_user_bookmarks')
-    if (localBookmarks) setUserBookmarks(JSON.parse(localBookmarks))
   }, [])
 
   // Listen to window storage events if user edits posts in control dashboard in another tab or window
@@ -101,11 +108,12 @@ export default function Blog() {
 
     if (targetId) {
       const found = posts.find(
-        (p) => p.id === targetId || p.slug === targetId || (p as any)._id === targetId
+        (p) => p.id === targetId || p.slug === targetId
       )
       if (found) {
         hasAutoOpenedRef.current = true
-        handleOpenPost(found)
+        const timer = setTimeout(() => handleOpenPost(found), 0)
+        return () => clearTimeout(timer)
       }
     }
   }, [posts, handleOpenPost])
@@ -175,7 +183,7 @@ export default function Blog() {
   // Share article link
   const handleShare = (post: BlogPost) => {
     const origin = window.location.origin
-    const shareUrl = `${origin}/blog?id=${post.id || (post as any)._id || post.slug}`
+    const shareUrl = `${origin}/blog?id=${post.id || post.slug}`
     navigator.clipboard.writeText(shareUrl)
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 2500)

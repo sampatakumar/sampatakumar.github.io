@@ -174,9 +174,18 @@ export const INITIAL_PROJECTS: Project[] = [
   }
 ]
 
-function mapProject(p: any): Project {
+function mapProject(p: Partial<Project> & { _id?: string }): Project {
   return {
-    ...p,
+    title: p.title || 'Untitled Project',
+    description: p.description || '',
+    longDescription: p.longDescription || '',
+    image: p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop',
+    techStack: p.techStack || ['React', 'TypeScript'],
+    liveDemoUrl: p.liveDemoUrl || '',
+    githubUrl: p.githubUrl || '',
+    category: p.category || 'Full-Stack',
+    featured: p.featured ?? false,
+    createdAt: p.createdAt || '2026-01-01',
     id: p.id || p._id || 'proj_' + Math.random().toString(36).substr(2, 9)
   }
 }

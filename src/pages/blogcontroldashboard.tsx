@@ -47,7 +47,7 @@ import {
 } from '../lib/projectService'
 
 export default function BlogControlDashboard() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isDashboardAuthenticated())
   const [pinInput, setPinInput] = useState('')
   const [pinError, setPinError] = useState(false)
   const [isChangePinOpen, setIsChangePinOpen] = useState(false)
@@ -97,7 +97,6 @@ export default function BlogControlDashboard() {
   const [projectTechStackInput, setProjectTechStackInput] = useState('React, Node.js')
 
   useEffect(() => {
-    setIsAuthenticated(isDashboardAuthenticated())
     fetchPostsAsync().then((fetched) => setPosts(fetched))
     fetchProjectsAsync().then((fetchedProj) => setProjects(fetchedProj))
   }, [])
@@ -262,8 +261,8 @@ export default function BlogControlDashboard() {
   }
 
   // Toggle draft / publish status
-  const handleTogglePublish = async (id: string, currentStatus: string) => {
-    const updated = await togglePublishStatusAsync(id, currentStatus)
+  const handleTogglePublish = async (id: string) => {
+    const updated = await togglePublishStatusAsync(id)
     if (updated) {
       showToast(`Article status changed to ${updated.status.toUpperCase()}`)
       await refreshPosts()
@@ -672,7 +671,7 @@ export default function BlogControlDashboard() {
 
                           <td className="py-4 px-6">
                             <button
-                              onClick={() => handleTogglePublish(post.id, post.status)}
+                              onClick={() => handleTogglePublish(post.id)}
                               className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
                                 post.status === 'published'
                                   ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25'

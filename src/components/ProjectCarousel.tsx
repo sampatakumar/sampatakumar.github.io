@@ -75,11 +75,11 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
           let transformClass = 'opacity-0 scale-75 pointer-events-none translate-x-0 z-0'
           if (isCenter) {
-            transformClass = 'translate-x-0 scale-100 opacity-100 z-30 shadow-[0_15px_40px_rgba(16,185,129,0.3)] border-emerald-500/60 pointer-events-auto'
+            transformClass = 'translate-x-0 scale-100 opacity-100 z-30 shadow-[0_20px_50px_rgba(16,185,129,0.35)] border-emerald-500/70 pointer-events-auto ring-1 ring-emerald-500/30'
           } else if (isRight) {
-            transformClass = 'translate-x-[20%] sm:translate-x-[55%] lg:translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-75 sm:opacity-85 z-20 border-slate-700 pointer-events-auto cursor-pointer hover:opacity-100'
+            transformClass = 'translate-x-[22%] sm:translate-x-[55%] lg:translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-70 sm:opacity-85 z-20 border-slate-700/60 pointer-events-auto cursor-pointer hover:opacity-100'
           } else if (isLeft) {
-            transformClass = '-translate-x-[20%] sm:-translate-x-[55%] lg:-translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-75 sm:opacity-85 z-20 border-slate-700 pointer-events-auto cursor-pointer hover:opacity-100'
+            transformClass = '-translate-x-[22%] sm:-translate-x-[55%] lg:-translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-70 sm:opacity-85 z-20 border-slate-700/60 pointer-events-auto cursor-pointer hover:opacity-100'
           }
 
           return (
@@ -89,7 +89,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 if (isLeft) handlePrev()
                 if (isRight) handleNext()
               }}
-              className={`absolute top-0 w-[90%] max-w-[310px] sm:max-w-[420px] lg:max-w-[460px] transition-all duration-700 ease-out glass-panel rounded-3xl overflow-hidden group flex flex-col justify-between ${transformClass}`}
+              className={`absolute top-0 w-[90%] max-w-[310px] sm:max-w-[420px] lg:max-w-[460px] h-[460px] sm:h-[500px] transition-all duration-700 ease-out glass-panel rounded-3xl overflow-hidden group flex flex-col justify-between ${transformClass}`}
             >
               <div>
                 {/* Image Banner */}

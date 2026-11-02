@@ -3,7 +3,7 @@ import ScrollReveal from '../components/ScrollReveal.tsx'
 import ProjectCarousel from '../components/ProjectCarousel.tsx'
 import { FaGithub, FaLinkedin, FaTerminal, FaFileDownload, FaEnvelope, FaExternalLinkAlt, FaWhatsapp } from "react-icons/fa"
 import { useEffect, useState } from "react";
-import BlurText from "../components/BlurText.js"
+import BlurText from "../components/BlurText"
 import TextType from '../components/TextType.tsx';
 import GlitchText from '../components/GlitchText.tsx';
 import { fetchProjectsAsync, type Project } from '../lib/projectService.ts'
@@ -141,14 +141,21 @@ export default function Home() {
             </div>
 
             {/* BUTTONS */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2 shrink-0">
+            <div className="flex flex-wrap gap-3.5 justify-center lg:justify-start pt-2 shrink-0">
+              <a
+                href="#projects"
+                className="emerald-glow-btn px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg hover:scale-105 transition-all"
+              >
+                Explore Projects
+              </a>
+
               <button
                 onClick={() =>
                   window.open("https://linkedin.com/in/sampatakumar-sv", "_blank")
                 }
-                className="neomorph-btn px-6 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400"
+                className="neomorph-btn px-5 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
               >
-                <FaLinkedin size={18} />
+                <FaLinkedin size={17} />
                 LinkedIn
               </button>
 
@@ -156,11 +163,26 @@ export default function Home() {
                 onClick={() =>
                   window.open("https://github.com/sampatakumar", "_blank")
                 }
-                className="neomorph-btn px-6 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400"
+                className="neomorph-btn px-5 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
               >
-                <FaGithub size={18} />
+                <FaGithub size={17} />
                 GitHub
               </button>
+            </div>
+
+            {/* Quick Metrics Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-left">
+              {[
+                { label: 'Featured Apps', value: `${projects.length || 12}+` },
+                { label: 'Public Repos', value: '20+' },
+                { label: 'Core Stack', value: 'React / TS' },
+                { label: 'Architecture', value: '100% Static' },
+              ].map((stat, i) => (
+                <div key={i} className="neomorph-inset p-3 rounded-2xl flex flex-col justify-center">
+                  <span className="font-extrabold text-base sm:text-lg text-gradient-emerald">{stat.value}</span>
+                  <span className="text-[11px] text-muted-foreground font-mono">{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -244,23 +266,28 @@ export default function Home() {
             {[
               {
                 id: "L01",
-                category: "Frontend",
-                skills: ["React.js", "Next.js", "Redux", "JavaScript", "HTML", "CSS"],
+                category: "Frontend Architecture",
+                skills: ["React.js", "TypeScript", "Next.js", "Tailwind CSS", "HTML5/CSS3"],
               },
               {
                 id: "L02",
-                category: "Backend",
+                category: "Backend & Systems",
                 skills: ["Node.js", "Express.js", "WebSockets", "REST APIs", "Python"],
               },
               {
                 id: "L03",
-                category: "Databases",
-                skills: ["Firebase", "Supabase", "PostgreSQL"],
+                category: "AI & Intelligence",
+                skills: ["Groq AI", "LangChain", "Ollama", "Multi-Stage Pipelines", "Prompt Engineering"],
               },
               {
                 id: "L04",
-                category: "Practices",
-                skills: ["REST API Design", "Agile Collaboration", "Git / GitHub"],
+                category: "Cloud & Databases",
+                skills: ["Firebase", "Supabase", "PostgreSQL", "Cloudflare Pages", "LocalStorage"],
+              },
+              {
+                id: "L05",
+                category: "Practices & DevOps",
+                skills: ["GitHub Actions", "CI/CD", "SPA Deployment", "Agile", "System Design"],
               },
             ].map((stack) => (
               <div

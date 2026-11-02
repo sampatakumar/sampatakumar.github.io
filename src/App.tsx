@@ -1,27 +1,32 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import AppRoute from "./routes/app.route"
-import GooeyNav from "./components/GooeyNav.js"
+import GooeyNav from "./components/GooeyNav"
 import Loading from "./pages/loading"
 import ThemeToggle from "./components/ThemeToggle"
 import CustomCursor from "./components/CustomCursor"
 import AnimatedBackground from "./components/AnimatedBackground"
 
 export function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(() => {
+    if (typeof window === "undefined") return false
+    return !sessionStorage.getItem("portfolio_intro_seen")
+  })
+  const [fadingOut, setFadingOut] = useState(false)
 
   useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => setLoading(false), 3500)
-    }
+    if (!loading) return
 
-    if (document.readyState === "complete") {
-      handleLoad()
-    } else {
-      window.addEventListener("load", handleLoad)
-      return () => window.removeEventListener("load", handleLoad)
-    }
-  }, [])
+    const timer = setTimeout(() => {
+      setFadingOut(true)
+      setTimeout(() => {
+        setLoading(false)
+        sessionStorage.setItem("portfolio_intro_seen", "true")
+      }, 450)
+    }, 1100)
+
+    return () => clearTimeout(timer)
+  }, [loading])
 
   const items = [
     { label: "Home", href: "/#home" },
@@ -31,17 +36,16 @@ export function App() {
     { label: "Contact", href: "/#contact" },
   ]
 
-  if (loading) {
-    return <Loading />
-  }
-
   return (
-    <div className="relative isolate min-h-screen overflow-x-hidden text-foreground transition-colors duration-300">
-      <AnimatedBackground />
+    <>
+      {loading && <Loading isExiting={fadingOut} />}
 
-      <CustomCursor />
+      <div className="relative isolate min-h-screen overflow-x-hidden text-foreground transition-colors duration-300">
+        <AnimatedBackground />
 
-      {/* Navbar */}
+        <CustomCursor />
+
+        {/* Navbar */}
 
       <nav
         className="
@@ -106,7 +110,8 @@ export function App() {
         <AppRoute />
       </main>
 
-    </div>
+      </div>
+    </>
   )
 }
 
