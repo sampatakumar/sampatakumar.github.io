@@ -93,13 +93,13 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
             >
               <div>
                 {/* Image Banner */}
-                <div className="relative h-44 sm:h-52 w-full overflow-hidden border-b border-emerald-500/20 bg-slate-950">
+                <div className="relative h-44 sm:h-52 w-full overflow-hidden border-b border-border/40 bg-card/60">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
                   
                   {project.featured && (
                     <span className="absolute top-3 right-3 bg-emerald-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg">
@@ -107,7 +107,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     </span>
                   )}
                   {project.category && (
-                    <span className="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="absolute bottom-3 left-3 neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {project.category}
                     </span>
                   )}
@@ -175,7 +175,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <button
             onClick={handlePrev}
             aria-label="Previous Project"
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel border border-emerald-500/40 text-emerald-400 hover:text-white hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center justify-center shadow-lg active:scale-95"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neomorph-btn text-emerald-600 dark:text-emerald-400 hover:scale-110 transition-all flex items-center justify-center shadow-lg active:scale-95"
           >
             <FaChevronLeft size={16} />
           </button>
@@ -189,8 +189,8 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all rounded-full ${
                   idx === activeIndex
-                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-emerald-400 shadow-[0_0_10px_#10b981]'
-                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-slate-700 hover:bg-slate-500'
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-emerald-500 shadow-[0_0_10px_#10b981]'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/60'
                 }`}
               />
             ))}
@@ -199,7 +199,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <button
             onClick={handleNext}
             aria-label="Next Project"
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel border border-emerald-500/40 text-emerald-400 hover:text-white hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center justify-center shadow-lg active:scale-95"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full neomorph-btn text-emerald-600 dark:text-emerald-400 hover:scale-110 transition-all flex items-center justify-center shadow-lg active:scale-95"
           >
             <FaChevronRight size={16} />
           </button>
