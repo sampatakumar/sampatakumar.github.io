@@ -33,6 +33,7 @@ export function App() {
     { label: "About", href: "/#about" },
     { label: "Stack", href: "/#skills" },
     { label: "Projects", href: "/#projects" },
+    { label: "Collab", href: "/#collab" },
     { label: "Contact", href: "/#contact" },
   ]
 

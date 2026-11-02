@@ -8,10 +8,11 @@ function vercelApiDevPlugin(): Plugin {
     name: 'vercel-api-dev',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        if (req.url && req.url.startsWith('/api/comments')) {
+        if (req.url && (req.url.startsWith('/api/comments') || req.url.startsWith('/api/collab'))) {
           try {
+            const isComments = req.url.startsWith('/api/comments')
             // @ts-expect-error dynamic serverless handler in dev mode
-            const mod = await import('./api/comments.js')
+            const mod = isComments ? await import('./api/comments.js') : await import('./api/collab.js')
             const urlObj = new URL(req.url, 'http://localhost:5173')
             const query: Record<string, string> = {}
             urlObj.searchParams.forEach((val, key) => {

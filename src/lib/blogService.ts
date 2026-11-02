@@ -413,4 +413,20 @@ export const getCommentsApiUrl = (): string => {
   return 'https://sampatakumar.vercel.app/api/comments'
 }
 
+export const getCollabApiUrl = (): string => {
+  if (import.meta.env.VITE_COLLAB_API_URL) {
+    return import.meta.env.VITE_COLLAB_API_URL
+  }
+  if (typeof window !== 'undefined') {
+    if (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.endsWith('.vercel.app')
+    ) {
+      return '/api/collab'
+    }
+  }
+  return 'https://sampatakumar.vercel.app/api/collab'
+}
+
 

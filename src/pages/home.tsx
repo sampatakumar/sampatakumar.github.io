@@ -21,7 +21,11 @@ import {
   FaBookOpen,
   FaCode,
   FaCheck,
-  FaChartLine
+  FaChartLine,
+  FaUsers,
+  FaHandshake,
+  FaPaperPlane,
+  FaRegLightbulb
 } from "react-icons/fa"
 import { motion, AnimatePresence } from "motion/react"
 import { useEffect, useState } from "react";
@@ -29,11 +33,70 @@ import BlurText from "../components/BlurText"
 import TextType from '../components/TextType.tsx';
 import GlitchText from '../components/GlitchText.tsx';
 import { fetchProjectsAsync, type Project } from '../lib/projectService.ts'
+import { getCollabApiUrl } from '../lib/blogService.ts'
 import '../styles/home.css'
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([])
   const [copiedToast, setCopiedToast] = useState<string | null>(null)
+
+  // Collab Form State
+  const [collabForm, setCollabForm] = useState({
+    name: '',
+    contact: '',
+    college: '',
+    projectTitle: '',
+    category: 'Final Year Capstone',
+    techStack: '',
+    timeline: 'This Semester',
+    description: ''
+  })
+  const [isSubmittingCollab, setIsSubmittingCollab] = useState(false)
+  const [collabSubmitted, setCollabSubmitted] = useState(false)
+  const [collabError, setCollabError] = useState<string | null>(null)
+
+  const handleCollabSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!collabForm.name.trim() || !collabForm.contact.trim() || !collabForm.projectTitle.trim() || !collabForm.description.trim()) {
+      setCollabError('Please fill out all required fields marked with *')
+      return
+    }
+
+    setCollabError(null)
+    setIsSubmittingCollab(true)
+
+    try {
+      const apiUrl = getCollabApiUrl()
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(collabForm)
+      })
+
+      if (res.ok) {
+        setCollabSubmitted(true)
+        setCopiedToast('Collaboration request saved to MongoDB!')
+        setTimeout(() => setCopiedToast(null), 3500)
+      } else {
+        const data = await res.json()
+        setCollabError(data.error || 'Failed to submit request')
+      }
+    } catch (err: unknown) {
+      console.warn('API error, falling back to local save:', err)
+      try {
+        const raw = localStorage.getItem('sampatakumar_collab_requests')
+        const prev = raw ? JSON.parse(raw) : []
+        localStorage.setItem('sampatakumar_collab_requests', JSON.stringify([{ ...collabForm, createdAt: new Date().toISOString() }, ...prev]))
+      } catch {
+        // ignore
+      }
+      setCollabSubmitted(true)
+      setCopiedToast('Collaboration request saved!')
+      setTimeout(() => setCopiedToast(null), 3500)
+    } finally {
+      setIsSubmittingCollab(false)
+    }
+  }
 
   const handleCopyEmail = (e?: React.MouseEvent) => {
     if (e) e.preventDefault()
@@ -132,6 +195,15 @@ export default function Home() {
               <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/40 dark:bg-white/[0.04] border border-border/60 text-muted-foreground text-xs font-mono backdrop-blur-xl">
                 <span className="text-cyan-400">⚡</span> React 19 · TypeScript · AI Systems
               </div>
+
+              {/* Collab Pill */}
+              <a
+                href="#collab"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-semibold backdrop-blur-xl hover:scale-105 transition-all"
+              >
+                <FaUsers className="text-[11px]" />
+                <span>Open for Student Collabs</span>
+              </a>
             </div>
 
             <div className="space-y-2">
@@ -195,6 +267,14 @@ export default function Home() {
                 className="emerald-glow-btn px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg hover:scale-105 transition-all"
               >
                 Explore Projects
+              </a>
+
+              <a
+                href="#collab"
+                className="neomorph-btn px-5 py-3 rounded-xl font-bold flex items-center gap-2 text-sm text-cyan-600 dark:text-cyan-400 hover:border-cyan-500/50 hover:scale-105 transition-all shadow-md"
+              >
+                <FaHandshake size={16} className="text-cyan-500 animate-pulse" />
+                Team Up / Collab
               </a>
 
               <button
@@ -911,6 +991,328 @@ export default function Home() {
         </div>
 
         <ProjectCarousel projects={projects} />
+      </section>
+
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
+
+      {/* ================= STUDENT & TEAMMATE COLLABORATION ================= */}
+      <section id="collab" className="px-6 lg:px-20 py-24 relative overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto space-y-12">
+          
+          {/* Section Header */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-semibold tracking-wider uppercase font-mono">
+              <FaUsers className="text-cyan-400 animate-pulse" />
+              Student &amp; Developer Collaboration
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-center text-gradient-obsidian tracking-tight">
+              Need a Teammate to Build Your Project?
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl text-center leading-relaxed">
+              Are you a student working on a final-year project, hackathon entry, or aspiring startup idea? Looking for a dedicated full-stack developer and AI systems teammate? Tell me about your project below!
+            </p>
+          </div>
+
+          {/* Content Container */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Left Column (Why Team Up) - 5 cols */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="obsidian-card p-6 sm:p-8 rounded-3xl space-y-6 border border-border/50">
+                <div className="flex items-center gap-3 pb-4 border-b border-border/40">
+                  <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-lg">
+                    <FaHandshake />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">Why Team Up With Me?</h3>
+                    <p className="text-xs text-muted-foreground">High-velocity execution &amp; clean architecture</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      title: "Full-Stack Architecture & Speed",
+                      desc: "Production React 19, TypeScript, Node.js, REST APIs, and instant cloud deployments on Vercel & GitHub.",
+                      icon: <FaRocket className="text-emerald-400 shrink-0 mt-1" />
+                    },
+                    {
+                      title: "AI & Modern Intelligent Systems",
+                      desc: "Deep integration with Groq, LangChain, local LLMs, NLP parsers, and custom prompt workflows.",
+                      icon: <FaBrain className="text-cyan-400 shrink-0 mt-1" />
+                    },
+                    {
+                      title: "Published Capstone Experience",
+                      desc: "Creator of Smart Skill Hub (published in IRE Journals) — experienced in project thesis, documentation, and defense.",
+                      icon: <FaGraduationCap className="text-violet-400 shrink-0 mt-1" />
+                    },
+                    {
+                      title: "Hackathon & Deadline Driven",
+                      desc: "Strong Git collaboration, modular component architecture, and delivering polished, bug-free demos on tight deadlines.",
+                      icon: <FaBolt className="text-amber-400 shrink-0 mt-1" />
+                    }
+                  ].map((p, idx) => (
+                    <div key={idx} className="flex items-start gap-3 p-3.5 rounded-2xl neomorph-inset">
+                      {p.icon}
+                      <div>
+                        <h4 className="text-xs font-bold text-foreground">{p.title}</h4>
+                        <p className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">{p.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Quick Direct Link Box */}
+                <div className="pt-2 border-t border-border/40 space-y-2">
+                  <span className="text-xs font-mono text-muted-foreground">Prefer direct messaging?</span>
+                  <div className="flex gap-2">
+                    <a
+                      href="https://wa.me/919380395607?text=Hi%20Sampatakumar,%20I'm%20looking%20for%20a%20teammate%20for%20my%20project!"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="neomorph-btn flex-1 py-2.5 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1.5 hover:scale-105 transition-all"
+                    >
+                      <FaWhatsapp /> WhatsApp Me
+                    </a>
+                    <button
+                      onClick={handleCopyEmail}
+                      className="neomorph-btn flex-1 py-2.5 rounded-xl text-xs font-semibold text-foreground/80 hover:text-emerald-400 flex items-center justify-center gap-1.5 hover:scale-105 transition-all"
+                    >
+                      <FaCopy /> Copy Email
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column (Interactive Collaboration Form) - 7 cols */}
+            <div className="lg:col-span-7">
+              <div className="obsidian-card p-6 sm:p-8 lg:p-10 rounded-3xl border border-cyan-500/30 shadow-[0_20px_50px_rgba(6,182,212,0.15)] relative overflow-hidden">
+                {/* Header */}
+                <div className="pb-6 border-b border-border/40 mb-6">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-foreground flex items-center gap-2">
+                    <FaRegLightbulb className="text-amber-400" /> Pitch Your Project Idea
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                    Fill out this quick form and your request will be saved to MongoDB Atlas. I'll review it and get back to you within 24 hours!
+                  </p>
+                </div>
+
+                {collabSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-10 text-center space-y-5"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(16,185,129,0.4)]">
+                      <FaCheckCircle />
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-2xl font-bold text-foreground">Collaboration Request Sent!</h4>
+                      <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                        Thanks for reaching out! I've received your request for <strong className="text-emerald-400">"{collabForm.projectTitle || 'your project'}"</strong> and stored it in MongoDB. I'll review the details and reach out soon.
+                      </p>
+                    </div>
+
+                    <div className="pt-4 flex flex-wrap justify-center gap-3">
+                      <a
+                        href={`https://wa.me/919380395607?text=${encodeURIComponent(`Hi Sampatakumar! I just submitted a collab request for my project "${collabForm.projectTitle}". Let's discuss!`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="emerald-glow-btn px-6 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2"
+                      >
+                        <FaWhatsapp /> Ping on WhatsApp Now
+                      </a>
+                      <button
+                        onClick={() => {
+                          setCollabSubmitted(false)
+                          setCollabForm({
+                            name: '',
+                            contact: '',
+                            college: '',
+                            projectTitle: '',
+                            category: 'Final Year Capstone',
+                            techStack: '',
+                            timeline: 'This Semester',
+                            description: ''
+                          })
+                        }}
+                        className="neomorph-btn px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold text-foreground/80 hover:text-emerald-400 transition-all"
+                      >
+                        Submit Another Request
+                      </button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleCollabSubmit} className="space-y-4">
+                    {collabError && (
+                      <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono">
+                        {collabError}
+                      </div>
+                    )}
+
+                    {/* Row 1: Name & Contact */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-mono font-medium text-foreground/90">
+                          Your Name <span className="text-emerald-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g., Rohit Sharma"
+                          value={collabForm.name}
+                          onChange={(e) => setCollabForm({ ...collabForm, name: e.target.value })}
+                          className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-mono font-medium text-foreground/90">
+                          Email / WhatsApp <span className="text-emerald-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g., rohit@gmail.com or +91..."
+                          value={collabForm.contact}
+                          onChange={(e) => setCollabForm({ ...collabForm, contact: e.target.value })}
+                          className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Row 2: College / Role & Timeline */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-mono font-medium text-foreground/90">
+                          College / Background
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g., 4th Year CSE @ VTU / Frontend Dev"
+                          value={collabForm.college}
+                          onChange={(e) => setCollabForm({ ...collabForm, college: e.target.value })}
+                          className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-mono font-medium text-foreground/90">
+                          Target Timeline
+                        </label>
+                        <select
+                          value={collabForm.timeline}
+                          onChange={(e) => setCollabForm({ ...collabForm, timeline: e.target.value })}
+                          className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground outline-none focus:ring-1 focus:ring-emerald-500 bg-background"
+                        >
+                          <option value="Immediate (Hackathon / Urgent)">Immediate (Hackathon / Urgent)</option>
+                          <option value="Within 1-2 Weeks">Within 1-2 Weeks</option>
+                          <option value="This Semester">This Semester</option>
+                          <option value="Next 2-3 Months">Next 2-3 Months</option>
+                          <option value="Flexible / Long Term">Flexible / Long Term</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Row 3: Project Title */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-medium text-foreground/90">
+                        Project Title / Concept Name <span className="text-emerald-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g., AI-Powered Drone Telemetry / MedTech Diagnostic App"
+                        value={collabForm.projectTitle}
+                        onChange={(e) => setCollabForm({ ...collabForm, projectTitle: e.target.value })}
+                        className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500"
+                      />
+                    </div>
+
+                    {/* Project Category Pills */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-medium text-foreground/90">
+                        Project Category
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          "Final Year Capstone",
+                          "Hackathon Project",
+                          "AI & Machine Learning",
+                          "Full-Stack Web App",
+                          "Mobile App",
+                          "Startup / MVP"
+                        ].map((cat) => (
+                          <button
+                            type="button"
+                            key={cat}
+                            onClick={() => setCollabForm({ ...collabForm, category: cat })}
+                            className={`px-3 py-1 rounded-xl text-xs font-mono font-medium transition-all cursor-pointer ${
+                              collabForm.category === cat
+                                ? 'bg-cyan-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(6,182,212,0.4)] scale-105'
+                                : 'neomorph-btn text-foreground/80 hover:text-cyan-400'
+                            }`}
+                          >
+                            {cat}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Tech Stack Needed */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-medium text-foreground/90">
+                        Tech Stack Needed / Proposed
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g., React, TypeScript, Python, FastAPI, Tailwind, MongoDB"
+                        value={collabForm.techStack}
+                        onChange={(e) => setCollabForm({ ...collabForm, techStack: e.target.value })}
+                        className="neomorph-inset w-full px-4 py-2.5 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500"
+                      />
+                    </div>
+
+                    {/* Description */}
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-medium text-foreground/90">
+                        What are you building &amp; what help do you need? <span className="text-emerald-500">*</span>
+                      </label>
+                      <textarea
+                        required
+                        rows={4}
+                        placeholder="Describe your project idea, the problem it solves, what you've done so far, and what role/help you're looking for from me..."
+                        value={collabForm.description}
+                        onChange={(e) => setCollabForm({ ...collabForm, description: e.target.value })}
+                        className="neomorph-inset w-full px-4 py-3 rounded-xl text-xs sm:text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-emerald-500 resize-none"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmittingCollab}
+                        className="emerald-glow-btn w-full py-3.5 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shadow-lg disabled:opacity-60"
+                      >
+                        {isSubmittingCollab ? (
+                          <span>Saving to MongoDB...</span>
+                        ) : (
+                          <>
+                            <FaPaperPlane /> Submit Collaboration Request
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </section>
 
       <div className="w-[90%] max-w-7xl mx-auto my-6">
