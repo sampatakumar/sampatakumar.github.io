@@ -16,9 +16,14 @@ import {
   FaLayerGroup,
   FaShieldAlt,
   FaGraduationCap,
-  FaCheckCircle
+  FaCheckCircle,
+  FaCopy,
+  FaBookOpen,
+  FaCode,
+  FaCheck,
+  FaChartLine
 } from "react-icons/fa"
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import { useEffect, useState } from "react";
 import BlurText from "../components/BlurText"
 import TextType from '../components/TextType.tsx';
@@ -28,6 +33,16 @@ import '../styles/home.css'
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([])
+  const [copiedToast, setCopiedToast] = useState<string | null>(null)
+
+  const handleCopyEmail = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault()
+    navigator.clipboard.writeText('sampatakumarsv@gmail.com')
+    setCopiedToast('Copied sampatakumarsv@gmail.com to clipboard!')
+    setTimeout(() => {
+      setCopiedToast(null)
+    }, 3200)
+  }
 
   useEffect(() => {
     document.title = "Sampatakumar V | Full-Stack Web Developer & Software Engineer"
@@ -183,6 +198,15 @@ export default function Home() {
               </a>
 
               <button
+                onClick={handleCopyEmail}
+                className="neomorph-btn px-5 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
+                title="Copy email to clipboard"
+              >
+                <FaCopy size={15} />
+                Copy Email
+              </button>
+
+              <button
                 onClick={() =>
                   window.open("https://linkedin.com/in/sampatakumar-sv", "_blank")
                 }
@@ -208,7 +232,7 @@ export default function Home() {
               {[
                 { label: 'Featured Apps', value: `${projects.length || 12}+` },
                 { label: 'Public Repos', value: '20+' },
-                { label: 'Core Stack', value: 'React / TS' },
+                { label: 'Research Paper', value: '1 Published' },
                 { label: 'Architecture', value: '100% Static' },
               ].map((stat, i) => (
                 <div key={i} className="obsidian-card p-3.5 flex flex-col justify-center">
@@ -410,7 +434,82 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Academic & Journey Card (Span 1) */}
+            {/* Published Research Paper Bento Card (Span 2) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="lg:col-span-2 obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-border/40">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold tracking-wide uppercase flex items-center gap-1.5">
+                      <FaBookOpen /> Published Research Paper
+                    </span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 font-mono text-[10px] font-semibold">
+                    ISSN: 2456-8880
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Peer-Reviewed Publication · IRE Journals</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mt-1 leading-snug">
+                    Smart Skill Hub: Autonomous Skill Intelligence, Career Acceleration &amp; Adaptive Learning Systems
+                  </h3>
+                </div>
+
+                <p className="text-foreground/85 text-xs sm:text-sm leading-relaxed">
+                  Authored and published research detailing the architectural design of autonomous skill gap analysis, adaptive curriculum roadmaps, automated sandboxed code execution, and AI-driven ATS resume optimization.
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+                  <div className="p-2.5 rounded-xl neomorph-inset text-center">
+                    <span className="block text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm">NLP / Groq</span>
+                    <span className="text-[10px] text-muted-foreground font-mono">Skill Extraction</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl neomorph-inset text-center">
+                    <span className="block text-cyan-600 dark:text-cyan-400 font-bold font-mono text-sm">&gt;94%</span>
+                    <span className="text-[10px] text-muted-foreground font-mono">ATS Correlation</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl neomorph-inset text-center">
+                    <span className="block text-violet-600 dark:text-violet-400 font-bold font-mono text-sm">Sandbox</span>
+                    <span className="text-[10px] text-muted-foreground font-mono">Code Evaluator</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl neomorph-inset text-center">
+                    <span className="block text-amber-600 dark:text-amber-400 font-bold font-mono text-sm">Peer-Reviewed</span>
+                    <span className="text-[10px] text-muted-foreground font-mono">Indexed Paper</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-border/40">
+                <span className="text-muted-foreground text-xs font-mono">Principal Author: Sampatakumar V</span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://smartskillhub.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="emerald-glow-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5"
+                  >
+                    <FaExternalLinkAlt className="text-[10px]" /> Live App
+                  </a>
+                  <a
+                    href="https://github.com/sampatakumar/SSH-final-year-project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all flex items-center gap-1.5"
+                  >
+                    <FaGithub className="text-xs" /> Repo
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* GitHub Live Activity Card (Span 1) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -419,8 +518,57 @@ export default function Home() {
               className="obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
             >
               <div className="space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-border/40">
+                  <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                    <FaGithub /> GitHub Activity
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-lg font-bold text-foreground">@sampatakumar</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Actively building and maintaining 20+ open-source repositories across AI tooling, full-stack applications, and developer utilities.
+                  </p>
+                </div>
+
+                <div className="space-y-2 pt-1 font-mono text-xs">
+                  <div className="flex justify-between p-2 rounded-xl neomorph-inset">
+                    <span className="text-muted-foreground">Public Repos:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">20+ Repositories</span>
+                  </div>
+                  <div className="flex justify-between p-2 rounded-xl neomorph-inset">
+                    <span className="text-muted-foreground">Top Languages:</span>
+                    <span className="text-cyan-600 dark:text-cyan-400 font-bold">TypeScript · React · Node</span>
+                  </div>
+                  <div className="flex justify-between p-2 rounded-xl neomorph-inset">
+                    <span className="text-muted-foreground">Architecture:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Zero-Server Static</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://github.com/sampatakumar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neomorph-btn w-full py-2.5 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2 hover:scale-105 transition-all"
+              >
+                <FaGithub /> Visit GitHub Profile
+              </a>
+            </motion.div>
+
+            {/* Academic & Journey Card (Span 1) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
+            >
+              <div className="space-y-4">
                 <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider pb-3 border-b border-border/40">
-                  <FaGraduationCap className="text-sm" /> Academic & Foundations
+                  <FaGraduationCap className="text-sm" /> Academic &amp; Foundations
                 </div>
 
                 <h4 className="text-xl font-bold text-foreground">Computer Science Engineering</h4>
@@ -458,7 +606,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.25 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
               className="lg:col-span-2 obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4 font-mono text-xs"
             >
               <div className="flex items-center justify-between pb-3 border-b border-border/40">
@@ -476,16 +624,23 @@ export default function Home() {
               <div className="neomorph-inset p-4 rounded-2xl overflow-x-auto text-left leading-relaxed text-[12px]">
                 <p className="text-foreground/80">&#123;</p>
                 <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"developer"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Sampatakumar V"</span>,</p>
-                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"focus"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Full-Stack Web Engineering & Intelligent Systems"</span>,</p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"focus"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Full-Stack Web Engineering &amp; Intelligent Systems"</span>,</p>
                 <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"coreStrengths"</span>: [<span className="text-emerald-600 dark:text-emerald-300">"Scalable Architecture"</span>, <span className="text-emerald-600 dark:text-emerald-300">"AI Tooling"</span>, <span className="text-emerald-600 dark:text-emerald-300">"Modern UX"</span>],</p>
                 <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"philosophy"</span>: <span className="text-amber-600 dark:text-amber-300">"Turning complex engineering challenges into seamless user reality."</span>,</p>
-                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"openTo"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Impactful software engineering roles, collaboration & open-source"</span></p>
+                <p className="pl-4"><span className="text-teal-600 dark:text-cyan-300">"openTo"</span>: <span className="text-emerald-600 dark:text-emerald-300">"Impactful software engineering roles, collaboration &amp; open-source"</span></p>
                 <p className="text-foreground/80">&#125;</p>
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
                 <span className="text-muted-foreground text-[11px]">Ready to build something exceptional together?</span>
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleCopyEmail}
+                    className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all flex items-center gap-1.5"
+                    title="Copy email to clipboard"
+                  >
+                    <FaCopy /> Copy Email
+                  </button>
                   <a
                     href="mailto:sampatakumarsv@gmail.com"
                     className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all flex items-center gap-1.5"
@@ -598,6 +753,145 @@ export default function Home() {
         <div className="obsidian-divider w-full" />
       </div>
 
+      {/* ================= FLAGSHIP CASE STUDY: SMART SKILL HUB ================= */}
+      <section id="flagship" className="px-6 lg:px-20 py-24 relative overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto space-y-12">
+          
+          {/* Section Header */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wider uppercase font-mono">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block"></span>
+              Flagship Architectural Case Study
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-center text-gradient-obsidian tracking-tight">
+              Smart Skill Hub (SSH)
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl text-center leading-relaxed">
+              Autonomous Skill Intelligence, Career Acceleration &amp; Adaptive Learning Architecture — Built with React 19, TypeScript, Groq LLMs, and Sandboxed Code Execution.
+            </p>
+          </div>
+
+          {/* Spotlight Showcase Container */}
+          <div className="obsidian-card rounded-3xl p-6 sm:p-10 lg:p-12 border border-emerald-500/40 shadow-[0_25px_60px_-15px_rgba(16,185,129,0.25)] relative overflow-hidden space-y-10">
+            
+            {/* Top Banner Row */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-border/40">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2.5 flex-wrap">
+                  <span className="px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-bold text-xs uppercase tracking-wider font-mono">
+                    Final Year Capstone
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold">
+                    Published in IRE Journals (ISSN: 2456-8880)
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-semibold">
+                    React 19 · TypeScript · Groq AI
+                  </span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground">
+                  Bridging the Academic-Industry Gap with Autonomous Intelligence
+                </h3>
+              </div>
+
+              <div className="flex items-center gap-3 shrink-0 flex-wrap">
+                <a
+                  href="https://smartskillhub.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="emerald-glow-btn px-6 py-3 rounded-xl text-sm font-extrabold flex items-center gap-2 shadow-lg hover:scale-105 transition-all"
+                >
+                  <FaExternalLinkAlt /> Launch Live App
+                </a>
+                <a
+                  href="https://github.com/sampatakumar/SSH-final-year-project"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neomorph-btn px-5 py-3 rounded-xl text-sm font-semibold flex items-center gap-2 text-foreground/85 hover:text-emerald-400 hover:scale-105 transition-all"
+                >
+                  <FaGithub size={17} /> Source Code
+                </a>
+              </div>
+            </div>
+
+            {/* Metrics Row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { label: 'ATS Match Accuracy', value: '>94%', desc: 'Semantic keyword correlation' },
+                { label: 'Integrated Modules', value: '6 Suites', desc: 'All-in-one skill ecosystem' },
+                { label: 'AI Inference Time', value: '<200ms', desc: 'Ultra-low latency Groq pipeline' },
+                { label: 'Architecture Model', value: '100% Client', desc: 'Zero server cost & static deploy' },
+              ].map((m, idx) => (
+                <div key={idx} className="neomorph-inset p-4 sm:p-5 rounded-2xl flex flex-col justify-between">
+                  <span className="text-2xl sm:text-3xl font-black text-gradient-obsidian">{m.value}</span>
+                  <span className="text-xs font-bold text-foreground mt-1">{m.label}</span>
+                  <span className="text-[11px] text-muted-foreground font-mono">{m.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* 6 Key Modules Grid */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-mono uppercase text-emerald-600 dark:text-emerald-400 tracking-wider font-bold">
+                Integrated Core Modules &amp; Subsystems
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  {
+                    title: 'Multi-Stage Skill-Gap Analyzer',
+                    desc: 'Parses job descriptions and learner profiles using NLP to pinpoint specific syllabus deficits and skill deficiencies.',
+                    icon: <FaChartLine className="text-emerald-500 dark:text-emerald-400" />
+                  },
+                  {
+                    title: 'Interactive Adaptive Roadmaps',
+                    desc: 'Dynamic graph-based learning milestones that automatically re-order and adapt to the student’s mastery velocity.',
+                    icon: <FaLayerGroup className="text-cyan-500 dark:text-cyan-400" />
+                  },
+                  {
+                    title: 'EduTube Distraction-Free Engine',
+                    desc: 'Curated educational video streaming pipeline that removes algorithmic rabbit holes and clickbait recommendations.',
+                    icon: <FaBookOpen className="text-violet-500 dark:text-violet-400" />
+                  },
+                  {
+                    title: 'Cloud Sandboxed Code Runner',
+                    desc: 'In-browser compilation and execution environment supporting multiple languages with instant test case feedback.',
+                    icon: <FaCode className="text-amber-500 dark:text-amber-400" />
+                  },
+                  {
+                    title: 'ATS Intelligent Resume Builder',
+                    desc: 'Generates industry-aligned resumes with quantified achievements and instant single-click export to PDF format.',
+                    icon: <FaRocket className="text-emerald-500 dark:text-emerald-400" />
+                  },
+                  {
+                    title: 'GitHub Intelligence Engine',
+                    desc: 'Inspects public repositories, commit patterns, and code contributions to authenticate developer skills with Octokit.',
+                    icon: <FaGithub className="text-teal-500 dark:text-teal-400" />
+                  },
+                ].map((mod, i) => (
+                  <div key={i} className="neomorph-card p-5 rounded-2xl space-y-2 border border-border/40 hover:border-emerald-500/30 transition-all">
+                    <div className="flex items-center gap-2.5 text-sm sm:text-base font-bold text-foreground">
+                      <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 shrink-0">
+                        {mod.icon}
+                      </div>
+                      <span>{mod.title}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed pl-1">
+                      {mod.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
+
       {/* ================= PROJECTS ================= */}
 
       <section
@@ -656,6 +950,16 @@ export default function Home() {
               <span>sampatakumarsv@gmail.com</span>
             </a>
 
+            {/* Copy Email Pill */}
+            <button
+              onClick={handleCopyEmail}
+              className="neomorph-pill font-mono text-xs sm:text-sm px-5 py-3 sm:px-6 sm:py-3.5 rounded-full text-foreground/90 dark:text-slate-200 border border-border/50 hover:border-emerald-500/50 hover:text-emerald-500 dark:hover:text-emerald-400 flex items-center gap-3 transition-all duration-200 cursor-pointer"
+              title="Copy email to clipboard"
+            >
+              <FaCopy className="text-emerald-500 text-xs" />
+              <span>Copy Email</span>
+            </button>
+
             {/* GitHub Pill */}
             <a
               href="https://github.com/sampatakumar"
@@ -698,7 +1002,7 @@ export default function Home() {
 
           <div className="text-muted-foreground text-sm text-center md:text-left">
             &copy; {new Date().getFullYear()} Sampatakumar V. All rights reserved.<br />
-            <span className="text-xs opacity-75">Architected with React, TypeScript & Modern High-Performance UI/UX Design System</span>
+            <span className="text-xs opacity-75">Architected with React, TypeScript &amp; Modern High-Performance UI/UX Design System</span>
           </div>
 
           <div className="flex items-center justify-center gap-6 text-muted-foreground">
@@ -712,6 +1016,24 @@ export default function Home() {
 
         </div>
       </footer>
+
+      {/* Fixed Obsidian Floating Toast Notification */}
+      <AnimatePresence>
+        {copiedToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.92 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[150] px-5 py-3.5 rounded-2xl obsidian-card border border-emerald-500/50 shadow-[0_20px_50px_rgba(16,185,129,0.35)] flex items-center gap-3 text-sm font-medium backdrop-blur-2xl"
+          >
+            <div className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <FaCheck size={12} />
+            </div>
+            <span className="text-foreground font-mono text-xs sm:text-sm">{copiedToast}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   )

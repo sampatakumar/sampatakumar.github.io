@@ -194,6 +194,21 @@ export default function Projects() {
                       {project.description}
                     </p>
 
+                    {/* Engineering Metrics */}
+                    {project.metrics && project.metrics.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {project.metrics.map((metric) => (
+                          <span
+                            key={metric}
+                            className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-medium"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                            {metric}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Tech Stack Pills */}
                     <div className="flex gap-1.5 flex-wrap pt-2">
                       {project.techStack.map((tech) => (
@@ -299,6 +314,20 @@ export default function Projects() {
                 <p className="text-foreground/90 text-sm md:text-base leading-relaxed">
                   {selectedProjectModal.longDescription || selectedProjectModal.description}
                 </p>
+
+                {selectedProjectModal.metrics && selectedProjectModal.metrics.length > 0 && (
+                  <div className="space-y-2 pt-1">
+                    <h4 className="text-xs font-mono uppercase text-emerald-600 dark:text-emerald-400 tracking-wider font-bold">Key Architectural Metrics</h4>
+                    <div className="flex gap-2 flex-wrap">
+                      {selectedProjectModal.metrics.map((metric) => (
+                        <span key={metric} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          {metric}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <div className="space-y-2 pt-2">
                   <h4 className="text-xs font-mono uppercase text-emerald-600 dark:text-emerald-400 tracking-wider font-bold">Technologies Used</h4>

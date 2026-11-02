@@ -22,6 +22,7 @@ import {
   likePostAsync,
   incrementViewsAsync,
   getAuthorDetails,
+  getCommentsApiUrl,
   type BlogPost
 } from '../lib/blogService'
 
@@ -33,6 +34,7 @@ export default function Blog() {
   const [sortBy, setSortBy] = useState<'latest' | 'popular' | 'likes'>('latest')
   const [activePost, setActivePost] = useState<BlogPost | null>(null)
   const [copiedLink, setCopiedLink] = useState(false)
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [userLikes, setUserLikes] = useState<Record<string, boolean>>(() => {
     try {
       const raw = localStorage.getItem('blog_user_likes')
@@ -50,15 +52,56 @@ export default function Blog() {
     }
   })
   const [commentInput, setCommentInput] = useState('')
-  const [comments, setComments] = useState<Record<string, { id: string; author: string; text: string; date: string }[]>>({
-    '1': [
-      { id: 'c1', author: 'Alex Chen', text: 'Great breakdown of React 19 features! The new action hooks are a game changer.', date: '2 days ago' },
-      { id: 'c2', author: 'Sarah Jenkins', text: 'Tailwind v4 integration tips were super helpful, thanks for sharing.', date: '1 day ago' }
-    ],
-    '3': [
-      { id: 'c3', author: 'Marcus Vance', text: 'Structured output validation for agent loops is so critical for production workloads.', date: '3 hours ago' }
-    ]
+  const [comments, setComments] = useState<Record<string, { id: string; author: string; text: string; date: string }[]>>(() => {
+    const DEFAULT_COMMENTS = {
+      '1': [
+        { id: 'c1', author: 'Alex Chen', text: 'Great breakdown of React 19 features! The new action hooks are a game changer.', date: '2 days ago' },
+        { id: 'c2', author: 'Sarah Jenkins', text: 'Tailwind v4 integration tips were super helpful, thanks for sharing.', date: '1 day ago' }
+      ],
+      '3': [
+        { id: 'c3', author: 'Marcus Vance', text: 'Structured output validation for agent loops is so critical for production workloads.', date: '3 hours ago' }
+      ]
+    }
+    try {
+      const raw = localStorage.getItem('sampatakumar_blog_comments')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        return { ...DEFAULT_COMMENTS, ...parsed }
+      }
+    } catch {
+      // fallback to defaults
+    }
+    return DEFAULT_COMMENTS
   })
+
+  // Fetch comments from MongoDB serverless API when an article modal is opened
+  useEffect(() => {
+    if (!activePost) return
+
+    let isMounted = true
+    const fetchPostComments = async () => {
+      try {
+        const apiUrl = getCommentsApiUrl()
+        const res = await fetch(`${apiUrl}?postId=${encodeURIComponent(activePost.id)}`)
+        if (res.ok) {
+          const data = await res.json()
+          if (isMounted && data.comments && Array.isArray(data.comments) && data.comments.length > 0) {
+            setComments((prev) => ({
+              ...prev,
+              [activePost.id]: data.comments
+            }))
+          }
+        }
+      } catch (err) {
+        console.warn('MongoDB serverless API sync deferred:', err)
+      }
+    }
+
+    fetchPostComments()
+    return () => {
+      isMounted = false
+    }
+  }, [activePost])
 
   useEffect(() => {
     // Load published posts from server or local fallback
@@ -190,17 +233,52 @@ export default function Blog() {
   }
 
   // Submit comment
-  const handleAddComment = (postId: string) => {
-    if (!commentInput.trim()) return
-    const newComment = {
-      id: Date.now().toString(),
-      author: 'You (Visitor)',
-      text: commentInput.trim(),
+  const handleAddComment = async (postId: string) => {
+    if (!commentInput.trim() || isSubmittingComment) return
+    const text = commentInput.trim()
+    const author = 'Visitor'
+
+    const tempId = 'temp_' + Date.now().toString()
+    const optimisticComment = {
+      id: tempId,
+      author,
+      text,
       date: 'Just now'
     }
+
     const current = comments[postId] || []
-    setComments({ ...comments, [postId]: [newComment, ...current] })
+    const updated = [optimisticComment, ...current]
+    setComments({ ...comments, [postId]: updated })
     setCommentInput('')
+
+    try {
+      localStorage.setItem('sampatakumar_blog_comments', JSON.stringify({ ...comments, [postId]: updated }))
+    } catch (err) {
+      console.warn('Failed to save comment to localStorage:', err)
+    }
+
+    setIsSubmittingComment(true)
+    try {
+      const apiUrl = getCommentsApiUrl()
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId, author, text })
+      })
+      if (res.ok) {
+        const data = await res.json()
+        if (data.comment) {
+          setComments((prev) => ({
+            ...prev,
+            [postId]: (prev[postId] || []).map((c) => (c.id === tempId ? data.comment : c))
+          }))
+        }
+      }
+    } catch (err) {
+      console.warn('MongoDB post saved locally (serverless deferred):', err)
+    } finally {
+      setIsSubmittingComment(false)
+    }
   }
 
   return (
@@ -682,10 +760,11 @@ export default function Blog() {
                     className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500"
                   />
                   <button
+                    disabled={isSubmittingComment}
                     onClick={() => handleAddComment(activePost.id)}
-                    className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs sm:text-sm transition-all w-full sm:w-auto"
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm transition-all w-full sm:w-auto flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                   >
-                    Post
+                    {isSubmittingComment ? 'Saving...' : 'Post'}
                   </button>
                 </div>
 

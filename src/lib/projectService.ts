@@ -11,6 +11,7 @@ export interface Project {
   category?: string
   featured?: boolean
   createdAt?: string
+  metrics?: string[]
 }
 
 const STORAGE_KEY = 'sampatakumar_portfolio_projects_v2'
@@ -27,7 +28,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/SSH-final-year-project',
     category: 'AI & Web',
     featured: true,
-    createdAt: '2026-08-01'
+    createdAt: '2026-08-01',
+    metrics: ['ATS Match >94%', 'Multi-Stage AI Pipeline', 'Sandboxed Code Exec']
   },
   {
     id: 'resume-ai',
@@ -40,7 +42,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/ResumeAI',
     category: 'AI & Tools',
     featured: true,
-    createdAt: '2026-07-20'
+    createdAt: '2026-07-20',
+    metrics: ['Multi-Format Parsing', 'Groq Sub-200ms', 'Instant PDF Export']
   },
   {
     id: 'git-reviewer',
@@ -53,7 +56,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/git-reviewer',
     category: 'Dev Tools',
     featured: true,
-    createdAt: '2026-07-15'
+    createdAt: '2026-07-15',
+    metrics: ['Octokit REST API', 'AI Profile Roaster', 'Interactive Charts']
   },
   {
     id: 'world-chronicle',
@@ -66,7 +70,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/The-World-Chronicle',
     category: 'AI & Media',
     featured: true,
-    createdAt: '2026-07-05'
+    createdAt: '2026-07-05',
+    metrics: ['150+ RSS Feeds', '100% Client-Side', 'Zero Server Latency']
   },
   {
     id: 'educonnect',
@@ -79,7 +84,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/Full-stack-event',
     category: 'Full-Stack',
     featured: true,
-    createdAt: '2026-06-25'
+    createdAt: '2026-06-25',
+    metrics: ['Socket.IO Realtime', 'Role-Based Access', 'Student Resource Hub']
   },
   {
     id: 'krishi-kendra',
@@ -92,7 +98,8 @@ export const INITIAL_PROJECTS: Project[] = [
     githubUrl: 'https://github.com/sampatakumar/Krishi-Kendra',
     category: 'Full-Stack',
     featured: true,
-    createdAt: '2026-06-15'
+    createdAt: '2026-06-15',
+    metrics: ['Farmer-Direct Trade', 'Zero Middlemen', 'Agri-Commerce Flow']
   },
   {
     id: 'noirwave',
@@ -186,6 +193,7 @@ function mapProject(p: Partial<Project> & { _id?: string }): Project {
     category: p.category || 'Full-Stack',
     featured: p.featured ?? false,
     createdAt: p.createdAt || '2026-01-01',
+    metrics: p.metrics || [],
     id: p.id || p._id || 'proj_' + Math.random().toString(36).substr(2, 9)
   }
 }
@@ -206,7 +214,13 @@ export function getStoredProjects(): Project[] {
     }
     const parsed = JSON.parse(raw)
     if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed.map(mapProject)
+      return parsed.map((p) => {
+        const init = INITIAL_PROJECTS.find((ip) => ip.id === p.id)
+        return mapProject({
+          ...p,
+          metrics: p.metrics && p.metrics.length > 0 ? p.metrics : init?.metrics
+        })
+      })
     }
   } catch (err) {
     console.warn('Failed to read projects from localStorage:', err)

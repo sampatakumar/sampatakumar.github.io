@@ -397,4 +397,20 @@ export const setDashboardAuthenticated = (status: boolean): void => {
   }
 }
 
+export const getCommentsApiUrl = (): string => {
+  if (import.meta.env.VITE_COMMENTS_API_URL) {
+    return import.meta.env.VITE_COMMENTS_API_URL
+  }
+  if (typeof window !== 'undefined') {
+    if (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.endsWith('.vercel.app')
+    ) {
+      return '/api/comments'
+    }
+  }
+  return 'https://sampatakumar.vercel.app/api/comments'
+}
+
 

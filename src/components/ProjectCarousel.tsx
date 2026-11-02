@@ -1,18 +1,56 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt, FaArrowRight, FaRocket } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaGithub, FaExternalLinkAlt, FaArrowRight, FaRocket, FaFilter } from 'react-icons/fa'
 import { type Project } from '../lib/projectService'
 
 interface ProjectCarouselProps {
   projects: Project[]
 }
 
+const CATEGORY_TABS = [
+  { id: 'All', label: 'All Projects' },
+  { id: 'AI', label: 'AI & Intelligent Apps' },
+  { id: 'Full-Stack', label: 'Full-Stack Systems' },
+  { id: 'Dev-Tools', label: 'Dev Tools & Audio' },
+] as const
+
 export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
 
-  const total = projects.length
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All') return projects
+    if (selectedCategory === 'AI') {
+      return projects.filter(
+        (p) =>
+          p.category?.toLowerCase().includes('ai') ||
+          p.techStack.some((t) => ['groq', 'langchain', 'ollama', 'ai'].some((k) => t.toLowerCase().includes(k)))
+      )
+    }
+    if (selectedCategory === 'Full-Stack') {
+      return projects.filter((p) => p.category?.toLowerCase().includes('full-stack'))
+    }
+    if (selectedCategory === 'Dev-Tools') {
+      return projects.filter(
+        (p) =>
+          p.category?.toLowerCase().includes('dev') ||
+          p.category?.toLowerCase().includes('tools') ||
+          p.category?.toLowerCase().includes('audio') ||
+          p.category?.toLowerCase().includes('productivity') ||
+          p.category?.toLowerCase().includes('utilities')
+      )
+    }
+    return projects
+  }, [projects, selectedCategory])
+
+  const total = filteredProjects.length
+
+  const handleSelectCategory = (catId: string) => {
+    setSelectedCategory(catId)
+    setActiveIndex(0)
+  }
 
   const handleNext = useCallback(() => {
     if (total === 0) return
@@ -50,7 +88,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
     return () => clearInterval(interval)
   }, [isPaused, total, handleNext])
 
-  if (total === 0) return null
+  if (projects.length === 0) return null
 
   return (
     <div
@@ -60,9 +98,32 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      {/* Category Filter Tabs */}
+      <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-8 z-40 relative px-4">
+        <span className="text-xs text-muted-foreground font-mono flex items-center gap-1.5 mr-1 hidden sm:inline-flex">
+          <FaFilter className="text-emerald-500 text-[10px]" /> Filter:
+        </span>
+        {CATEGORY_TABS.map((tab) => {
+          const isSelected = selectedCategory === tab.id
+          return (
+            <button
+              key={tab.id}
+              onClick={() => handleSelectCategory(tab.id)}
+              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold font-mono transition-all duration-300 ${
+                isSelected
+                  ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.45)] font-bold scale-105'
+                  : 'neomorph-btn text-foreground/80 hover:text-emerald-400 hover:border-emerald-500/40'
+              }`}
+            >
+              {tab.label}
+            </button>
+          )
+        })}
+      </div>
+
       {/* Main 3D Stage */}
-      <div className="relative h-[530px] sm:h-[570px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
-        {projects.map((project, idx) => {
+      <div className="relative h-[550px] sm:h-[590px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
+        {filteredProjects.map((project, idx) => {
           let diff = idx - activeIndex
           if (diff > total / 2) diff -= total
           if (diff < -total / 2) diff += total
@@ -102,11 +163,11 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 if (isRight) handleNext()
               }}
               style={cardStyle}
-              className={`w-[88vw] max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] h-[480px] sm:h-[510px] shrink-0 obsidian-card rounded-3xl overflow-hidden group flex flex-col justify-between ${borderShadowClass}`}
+              className={`w-[88vw] max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] h-[500px] sm:h-[540px] shrink-0 obsidian-card rounded-3xl overflow-hidden group flex flex-col justify-between ${borderShadowClass}`}
             >
               <div>
                 {/* Image Banner */}
-                <div className="relative h-44 sm:h-52 w-full overflow-hidden border-b border-border/40 bg-card/60">
+                <div className="relative h-40 sm:h-48 w-full overflow-hidden border-b border-border/40 bg-card/60">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -127,7 +188,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 sm:p-6 space-y-2.5 sm:space-y-3">
+                <div className="p-5 sm:p-6 space-y-2.5">
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-emerald-400 transition-colors line-clamp-1">
                     {project.title}
                   </h3>
@@ -135,8 +196,23 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     {project.description}
                   </p>
                   
+                  {/* Engineering Metrics Badges */}
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {project.metrics.slice(0, 3).map((metric) => (
+                        <span
+                          key={metric}
+                          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-medium"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                          {metric}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Tech stack badges */}
-                  <div className="flex gap-1.5 flex-wrap pt-1">
+                  <div className="flex gap-1.5 flex-wrap pt-0.5">
                     {project.techStack.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
@@ -200,7 +276,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
           {/* Dots */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {projects.map((_, idx) => (
+            {filteredProjects.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
