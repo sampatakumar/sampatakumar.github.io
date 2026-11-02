@@ -82,7 +82,7 @@ export default function Projects() {
             <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-sm" />
             <input
               type="text"
-              placeholder="Search by project name or tech stack (e.g., React, MongoDB)..."
+              placeholder="Search by project name or tech stack (e.g., React, TypeScript, AI)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="neomorph-inset w-full pl-11 pr-4 py-3 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm text-foreground placeholder:text-muted-foreground font-medium"

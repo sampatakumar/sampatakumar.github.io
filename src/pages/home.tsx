@@ -109,7 +109,7 @@ export default function Home() {
                 cursorCharacter="▋"
                 text={[
                   "Computer Science Engineer passionate about Full-Stack Web Development & System Architecture.",
-                  "Building high-performance web apps using React, Node.js, TypeScript, and MongoDB.",
+                  "Building high-performance web apps using React, Node.js, TypeScript, and modern cloud databases.",
                   "Architecting clean REST APIs, microservices, and AI-powered web solutions.",
                   "Transforming complex requirements into seamless, user-centric web applications.",
                   "Always exploring cutting-edge web frameworks, cloud technology, and AI integrations."
@@ -135,7 +135,7 @@ export default function Home() {
                 <p><span className="text-emerald-600 dark:text-emerald-400">const</span> <span className="text-teal-600 dark:text-cyan-300">stack</span> = &#123;</p>
                 <p className="pl-4"><span className="text-muted-foreground">frontend:</span> [<span className="text-emerald-700 dark:text-emerald-300">'React.js'</span>, <span className="text-emerald-700 dark:text-emerald-300">'TypeScript'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Tailwind CSS'</span>],</p>
                 <p className="pl-4"><span className="text-muted-foreground">backend:</span> [<span className="text-teal-700 dark:text-cyan-300">'Node.js'</span>, <span className="text-teal-700 dark:text-cyan-300">'Express.js'</span>, <span className="text-teal-700 dark:text-cyan-300">'REST APIs'</span>],</p>
-                <p className="pl-4"><span className="text-muted-foreground">databases:</span> [<span className="text-emerald-700 dark:text-emerald-300">'MongoDB'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Firebase'</span>]</p>
+                <p className="pl-4"><span className="text-muted-foreground">databases:</span> [<span className="text-emerald-700 dark:text-emerald-300">'Firebase'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Supabase'</span>, <span className="text-emerald-700 dark:text-emerald-300">'PostgreSQL'</span>]</p>
                 <p>&#125;;</p>
               </div>
             </div>
@@ -209,7 +209,7 @@ export default function Home() {
             animateBy="words"
           />
           <BlurText
-            text="My core tech stack spans React.js, TypeScript, Node.js, Express, MongoDB, and Firebase. I focus on clean software architecture, component-driven UI design, and reliable backend services."
+            text="My core tech stack spans React.js, TypeScript, Node.js, Express, Firebase, and Supabase. I focus on clean software architecture, component-driven UI design, and reliable backend services."
             delay={400}
             animateBy="words"
           />
@@ -255,7 +255,7 @@ export default function Home() {
               {
                 id: "L03",
                 category: "Databases",
-                skills: ["MongoDB", "Firebase"],
+                skills: ["Firebase", "Supabase", "PostgreSQL"],
               },
               {
                 id: "L04",

@@ -1150,7 +1150,7 @@ export default function BlogControlDashboard() {
                 <input
                   type="text"
                   required
-                  placeholder="React, Node.js, Express, MongoDB, TypeScript..."
+                  placeholder="React, Node.js, Express, TypeScript, Firebase..."
                   value={projectTechStackInput}
                   onChange={(e) => setProjectTechStackInput(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-emerald-500"

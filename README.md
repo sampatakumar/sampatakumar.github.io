@@ -10,7 +10,8 @@ A personal portfolio built with React, TypeScript, Vite, and Tailwind CSS. It sh
 - Theme-aware animated background and dark/light mode toggle
 - Interactive project gallery with filters and detail views
 - Developer-focused UI effects, custom cursor, and profile card
-- Blog management dashboard backed by a Node.js server
+- Built for fast, static deployment directly on GitHub Pages
+- Interactive client-side blog & portfolio management dashboard
 
 <div align="center">
 
@@ -61,14 +62,14 @@ My main interests are **frontend development, backend systems, databases, mobile
 
 | Area | Technologies |
 | --- | --- |
-| **Frontend** | React.js, JavaScript, HTML, CSS |
+| **Frontend** | React.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS |
 | **Backend** | Node.js, Express.js |
-| **Database** | MongoDB |
-| **Mobile** | React Native |
-| **Authentication** | Firebase, JWT |
+| **Databases** | Firebase, Supabase, PostgreSQL |
+| **Mobile** | React Native, Expo |
+| **Authentication** | Firebase, Supabase Auth |
 | **Real-time** | Socket.io |
 | **Tools** | Git, GitHub, Vite, npm |
-| **AI** | Ollama, Local LLMs |
+| **AI** | Groq AI, LangChain, Ollama, Local LLMs |
 
 ---
 
@@ -78,7 +79,7 @@ My main interests are **frontend development, backend systems, databases, mobile
 
 A learning platform designed for students to access learning resources, practice coding, and manage their learning activities from one place.
 
-**Focus:** React · Node.js · MongoDB · AI · Learning Platform
+**Focus:** React · Node.js · AI · Learning Platform
 
 ---
 
@@ -94,7 +95,7 @@ An AI-assisted application focused on helping users create, improve, and work wi
 
 A full-stack platform for students to share notes and resources, communicate, and access academic content.
 
-**Focus:** React · Node.js · MongoDB · Firebase · Socket.io
+**Focus:** React · Node.js · Firebase · Socket.io
 
 ---
 
@@ -124,10 +125,10 @@ I'm also experimenting with **local AI models and LLM tooling** using technologi
 
 ```text
 01  Full Stack Development
-02  React & JavaScript
+02  React & TypeScript
 03  Backend & REST APIs
-04  MongoDB & Database Design
-05  React Native
+04  Cloud Databases & System Design
+05  React Native & Expo
 06  AI-powered Applications
 07  Software Engineering Practices
 ```

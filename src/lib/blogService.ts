@@ -227,13 +227,7 @@ export const savePostsToStorage = (posts: BlogPost[]): void => {
   }
 }
 
-// API Backend Integration Helpers with LocalStorage Fallback
-const RENDER_BACKEND_URL = 'https://sampatakumar-github-io.onrender.com'
-const rawApiUrl =
-  import.meta.env.VITE_API_URL ||
-  (typeof window !== 'undefined' && window.location.hostname.includes('github.io') ? RENDER_BACKEND_URL : '')
-const API_BASE = rawApiUrl ? `${rawApiUrl.replace(/\/$/, '')}/api/blogs` : '/api/blogs'
-
+// Static LocalStorage Management (Pure Client-Side / GitHub Pages)
 export const getAuthorDetails = (author?: any) => {
   const defaultAuthor = {
     name: 'Sampatakumar V',
@@ -247,37 +241,8 @@ export const getAuthorDetails = (author?: any) => {
   return { name, avatar, role }
 }
 
-const normalizeMongoPost = (item: any): BlogPost => ({
-  id: item._id || item.id || Date.now().toString(),
-  title: item.title,
-  slug: item.slug,
-  excerpt: item.excerpt || '',
-  content: item.content || '',
-  coverImage: item.coverImage || '',
-  category: item.category || 'Engineering',
-  tags: item.tags || [],
-  publishedAt: item.publishedAt || new Date().toISOString().split('T')[0],
-  readTime: item.readTime || '5 min read',
-  views: item.views || 0,
-  likes: item.likes || 0,
-  status: item.status || 'draft',
-  featured: !!item.featured,
-  author: getAuthorDetails(item.author)
-})
-
 export const fetchPostsAsync = async (): Promise<BlogPost[]> => {
-  try {
-    const res = await fetch(API_BASE)
-    if (res.ok) {
-      const data = await res.json()
-      const normalized = data.map(normalizeMongoPost)
-      savePostsToStorage(normalized)
-      return normalized
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable, serving posts from localStorage fallback:', err)
-  }
-  return getStoredPosts()
+  return Promise.resolve(getStoredPosts())
 }
 
 export const savePostAsync = async (post: Partial<BlogPost>): Promise<BlogPost> => {
@@ -285,110 +250,28 @@ export const savePostAsync = async (post: Partial<BlogPost>): Promise<BlogPost> 
     ...post,
     author: getAuthorDetails(post.author)
   }
-  try {
-    const isEdit = !!post.id
-    const url = isEdit ? `${API_BASE}/${post.id}` : API_BASE
-    const method = isEdit ? 'PUT' : 'POST'
-
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(postWithAuthor)
-    })
-
-    if (res.ok) {
-      const data = await res.json()
-      const saved = normalizeMongoPost(data)
-      const current = getStoredPosts()
-      const next = isEdit ? current.map((p) => (p.id === saved.id ? saved : p)) : [saved, ...current]
-      savePostsToStorage(next)
-      return saved
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable, saving to localStorage fallback:', err)
-  }
-  return savePost(postWithAuthor)
+  return Promise.resolve(savePost(postWithAuthor))
 }
 
 export const deletePostAsync = async (id: string): Promise<void> => {
-  try {
-    if (id) {
-      await fetch(`${API_BASE}/${id}`, { method: 'DELETE' })
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable for delete:', err)
-  }
   deletePost(id)
+  return Promise.resolve()
 }
 
-export const togglePublishStatusAsync = async (id: string, currentStatus: string): Promise<BlogPost | undefined> => {
-  const nextStatus = currentStatus === 'published' ? 'draft' : 'published'
-  try {
-    if (id) {
-      const res = await fetch(`${API_BASE}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: nextStatus })
-      })
-      if (res.ok) {
-        const data = await res.json()
-        const updated = normalizeMongoPost(data)
-        const current = getStoredPosts()
-        savePostsToStorage(current.map((p) => (p.id === updated.id ? updated : p)))
-        return updated
-      }
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable for toggle status:', err)
-  }
-  return togglePublishStatus(id)
+export const togglePublishStatusAsync = async (id: string, _currentStatus: string): Promise<BlogPost | undefined> => {
+  return Promise.resolve(togglePublishStatus(id))
 }
 
 export const likePostAsync = async (id: string): Promise<number> => {
-  try {
-    if (id) {
-      const res = await fetch(`${API_BASE}/${id}/like`, { method: 'POST' })
-      if (res.ok) {
-        const data = await res.json()
-        const current = getStoredPosts()
-        savePostsToStorage(current.map((p) => (p.id === id ? { ...p, likes: data.likes } : p)))
-        return data.likes
-      }
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable for like:', err)
-  }
-  return likePost(id)
+  return Promise.resolve(likePost(id))
 }
 
 export const incrementViewsAsync = async (id: string): Promise<number> => {
-  try {
-    if (id) {
-      const res = await fetch(`${API_BASE}/${id}`)
-      if (res.ok) {
-        const data = await res.json()
-        return data.views
-      }
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable for views increment:', err)
-  }
-  return incrementViews(id)
+  return Promise.resolve(incrementViews(id))
 }
 
 export const resetBlogToDefaultsAsync = async (): Promise<BlogPost[]> => {
-  try {
-    const res = await fetch(`${API_BASE}/seed`, { method: 'POST' })
-    if (res.ok) {
-      const data = await res.json()
-      const normalized = data.blogs.map(normalizeMongoPost)
-      savePostsToStorage(normalized)
-      return normalized
-    }
-  } catch (err) {
-    console.warn('Backend API unavailable for seed reset:', err)
-  }
-  return resetBlogToDefaults()
+  return Promise.resolve(resetBlogToDefaults())
 }
 
 export const getPostById = (id: string): BlogPost | undefined => {
