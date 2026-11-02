@@ -80,14 +80,14 @@
 
 .dark {
     color-scheme: dark;
-    --background: #070a12;
+    --background: #030712;
     --foreground: #f8fafc;
-    --card: rgba(13, 19, 33, 0.72);
+    --card: rgba(10, 16, 31, 0.72);
     --card-foreground: #f8fafc;
     --card-border: rgba(255, 255, 255, 0.08);
-    --card-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.09), inset 0 0 20px rgba(16, 185, 129, 0.03);
-    --card-inset: rgba(7, 10, 18, 0.7);
-    --popover: rgba(13, 19, 33, 0.9);
+    --card-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 0 25px rgba(16, 185, 129, 0.02);
+    --card-inset: rgba(4, 7, 15, 0.75);
+    --popover: rgba(10, 16, 31, 0.92);
     --popover-foreground: #f8fafc;
     --primary: #10b981;
     --primary-foreground: #022c22;
@@ -101,7 +101,7 @@
     --border: rgba(255, 255, 255, 0.08);
     --input: rgba(15, 23, 42, 0.6);
     --ring: #10b981;
-    --nm-shadow-dark: rgba(0, 0, 0, 0.5);
+    --nm-shadow-dark: rgba(0, 0, 0, 0.6);
     --nm-shadow-light: rgba(255, 255, 255, 0.05);
     --nm-border: rgba(255, 255, 255, 0.08);
     --nm-border-inset: rgba(255, 255, 255, 0.05);
@@ -265,4 +265,72 @@
 .emerald-glow-btn:hover {
   box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ELITE OBSIDIAN GLASS DESIGN SYSTEM (Linear & Vercel Style)
+   ========================================================================== */
+
+/* Obsidian Card with Top Edge Micro-Highlight */
+.obsidian-card {
+  background: var(--card);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.obsidian-card::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 30%, rgba(52, 211, 153, 0.4) 50%, rgba(255, 255, 255, 0.15) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+:root:not(.dark) .obsidian-card::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(5, 150, 105, 0.25) 50%, transparent 100%);
+}
+
+.obsidian-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.obsidian-card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.85), 0 0 35px -5px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+:root:not(.dark) .obsidian-card-hover:hover {
+  border-color: rgba(5, 150, 105, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15), 0 0 25px -5px rgba(5, 150, 105, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Linear-style Ambient Horizontal Divider */
+.obsidian-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.2) 20%, rgba(6, 182, 212, 0.35) 50%, rgba(16, 185, 129, 0.2) 80%, transparent 100%);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+/* High-Contrast Obsidian Title Gradient */
+.text-gradient-obsidian {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 35%, #a7f3d0 70%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 20px rgba(16, 185, 129, 0.25));
+}
+
+:root:not(.dark) .text-gradient-obsidian {
+  background: linear-gradient(135deg, #0f172a 0%, #059669 45%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: none;
 }

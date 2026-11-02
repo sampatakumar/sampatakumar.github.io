@@ -61,10 +61,8 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
       onTouchEnd={handleTouchEnd}
     >
       {/* Main 3D Stage */}
-      <div className="relative h-[520px] sm:h-[560px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
+      <div className="relative h-[530px] sm:h-[570px] w-full flex items-center justify-center overflow-hidden sm:overflow-visible">
         {projects.map((project, idx) => {
-          // Normalize the position around the active slide. Only the immediate
-          // neighbours belong on either side; the rest must stay out of view.
           let diff = idx - activeIndex
           if (diff > total / 2) diff -= total
           if (diff < -total / 2) diff += total
@@ -72,15 +70,29 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           const isCenter = diff === 0
           const isRight = diff === 1
           const isLeft = diff === -1
+          const isVisible = Math.abs(diff) <= 1
 
-          let transformClass = 'opacity-0 scale-75 pointer-events-none translate-x-0 z-0'
-          if (isCenter) {
-            transformClass = 'translate-x-0 scale-100 opacity-100 z-30 shadow-[0_20px_50px_rgba(16,185,129,0.35)] border-emerald-500/70 pointer-events-auto ring-1 ring-emerald-500/30'
-          } else if (isRight) {
-            transformClass = 'translate-x-[22%] sm:translate-x-[55%] lg:translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-70 sm:opacity-85 z-20 border-slate-700/60 pointer-events-auto cursor-pointer hover:opacity-100'
-          } else if (isLeft) {
-            transformClass = '-translate-x-[22%] sm:-translate-x-[55%] lg:-translate-x-[65%] scale-[0.82] sm:scale-[0.88] opacity-70 sm:opacity-85 z-20 border-slate-700/60 pointer-events-auto cursor-pointer hover:opacity-100'
+          const cardStyle: React.CSSProperties = {
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: isCenter
+              ? 'translate(-50%, -50%) scale(1)'
+              : isRight
+              ? 'translate(calc(-50% + min(62%, 300px)), -50%) scale(0.88)'
+              : isLeft
+              ? 'translate(calc(-50% - min(62%, 300px)), -50%) scale(0.88)'
+              : 'translate(-50%, -50%) scale(0.7)',
+            zIndex: isCenter ? 30 : isVisible ? 20 : 0,
+            opacity: isCenter ? 1 : isVisible ? 0.75 : 0,
+            pointerEvents: isVisible ? 'auto' : 'none',
+            visibility: isVisible ? 'visible' : 'hidden',
+            transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           }
+
+          const borderShadowClass = isCenter
+            ? 'border-emerald-500/80 shadow-[0_25px_60px_-12px_rgba(16,185,129,0.35)] ring-1 ring-emerald-500/30'
+            : 'border-border/60 cursor-pointer hover:opacity-95 hover:border-emerald-500/40'
 
           return (
             <div
@@ -89,7 +101,8 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 if (isLeft) handlePrev()
                 if (isRight) handleNext()
               }}
-              className={`absolute top-0 w-[90%] max-w-[310px] sm:max-w-[420px] lg:max-w-[460px] h-[460px] sm:h-[500px] transition-all duration-700 ease-out glass-panel rounded-3xl overflow-hidden group flex flex-col justify-between ${transformClass}`}
+              style={cardStyle}
+              className={`w-[88vw] max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] h-[480px] sm:h-[510px] shrink-0 obsidian-card rounded-3xl overflow-hidden group flex flex-col justify-between ${borderShadowClass}`}
             >
               <div>
                 {/* Image Banner */}
@@ -97,25 +110,25 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/25 to-transparent"></div>
                   
                   {project.featured && (
-                    <span className="absolute top-3 right-3 bg-emerald-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg">
+                    <span className="absolute top-3 right-3 bg-emerald-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-lg font-mono">
                       Featured
                     </span>
                   )}
                   {project.category && (
-                    <span className="absolute bottom-3 left-3 neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10 text-emerald-400 text-xs font-medium font-mono">
                       {project.category}
                     </span>
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="p-4 sm:p-6 space-y-2 sm:space-y-3">
-                  <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+                <div className="p-5 sm:p-6 space-y-2.5 sm:space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-emerald-400 transition-colors line-clamp-1">
                     {project.title}
                   </h3>
                   <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2">
@@ -123,28 +136,33 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                   </p>
                   
                   {/* Tech stack badges */}
-                  <div className="flex gap-1 flex-wrap pt-1">
-                    {project.techStack.map((tech) => (
+                  <div className="flex gap-1.5 flex-wrap pt-1">
+                    {project.techStack.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-300 text-[11px] font-medium"
+                        className="px-2.5 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-300 text-[11px] font-medium font-mono"
                       >
                         {tech}
                       </span>
                     ))}
+                    {project.techStack.length > 4 && (
+                      <span className="px-2 py-0.5 rounded-lg bg-white/5 text-muted-foreground text-[10px] font-mono">
+                        +{project.techStack.length - 4}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="p-4 sm:p-6 pt-0 flex gap-2.5">
+              <div className="p-5 sm:p-6 pt-0 flex gap-2.5">
                 {project.liveDemoUrl && (
                   <a
                     href={project.liveDemoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="emerald-glow-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5"
+                    className="emerald-glow-btn px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-md hover:scale-105 transition-all"
                   >
                     <FaExternalLinkAlt className="text-[10px]" /> Live Demo
                   </a>
@@ -155,7 +173,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="emerald-glow-btn px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5"
+                    className="neomorph-btn px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 text-foreground/85 hover:text-emerald-400 hover:scale-105 transition-all"
                   >
                     <FaGithub className="text-sm" /> Code
                   </a>

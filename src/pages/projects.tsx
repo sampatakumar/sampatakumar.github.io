@@ -72,10 +72,10 @@ export default function Projects() {
 
       {/* Hero Banner */}
       <div className="text-center py-12 space-y-4">
-        <div className="neomorph-pill inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider font-mono">
           <FaRocket /> Software Engineering Portfolio
         </div>
-        <ScrollReveal textClassName="text-4xl sm:text-6xl font-extrabold text-gradient-emerald">
+        <ScrollReveal textClassName="text-4xl sm:text-6xl font-extrabold text-gradient-obsidian">
           Full-Stack Projects Gallery
         </ScrollReveal>
         <p className="max-w-2xl mx-auto text-muted-foreground text-base sm:text-lg leading-relaxed">
@@ -84,7 +84,7 @@ export default function Projects() {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="neomorph-card rounded-3xl p-6 mb-12 space-y-6">
+      <div className="obsidian-card rounded-3xl p-6 mb-12 space-y-6">
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
           
           {/* Search Input */}
@@ -158,7 +158,7 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
                 key={project.id}
-                className="neomorph-card neomorph-card-hover rounded-3xl overflow-hidden group flex flex-col justify-between"
+                className="obsidian-card obsidian-card-hover rounded-3xl overflow-hidden group flex flex-col justify-between"
               >
                 <div>
                   {/* Project Image Header */}
@@ -167,18 +167,18 @@ export default function Projects() {
                       src={project.image}
                       alt={project.title}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/25 to-transparent"></div>
                     
                     {project.featured && (
-                      <span className="absolute top-3 right-3 bg-emerald-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md">
+                      <span className="absolute top-3 right-3 bg-emerald-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md font-mono">
                         Featured
                       </span>
                     )}
 
                     {project.category && (
-                      <span className="absolute bottom-3 left-3 neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">
+                      <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10 text-emerald-400 text-xs font-semibold font-mono">
                         {project.category}
                       </span>
                     )}
@@ -186,7 +186,7 @@ export default function Projects() {
 
                   {/* Body Content */}
                   <div className="p-6 space-y-3">
-                    <h3 className="text-2xl font-bold text-foreground group-hover:text-emerald-500 transition-colors">
+                    <h3 className="text-2xl font-bold text-foreground group-hover:text-emerald-400 transition-colors">
                       {project.title}
                     </h3>
                     
@@ -199,7 +199,7 @@ export default function Projects() {
                       {project.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="neomorph-pill px-2.5 py-1 rounded-lg text-emerald-600 dark:text-emerald-400 text-xs font-medium"
+                          className="px-2.5 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-300 text-xs font-medium font-mono"
                         >
                           {tech}
                         </span>
@@ -216,7 +216,7 @@ export default function Projects() {
                         href={project.liveDemoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
+                        className="emerald-glow-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-md hover:scale-105 transition-all"
                       >
                         <FaExternalLinkAlt className="text-[10px]" /> Live Demo
                       </a>
@@ -226,7 +226,7 @@ export default function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
+                        className="neomorph-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-foreground/80 hover:text-emerald-500 hover:scale-105 transition-all"
                       >
                         <FaGithub className="text-sm" /> Code
                       </a>
@@ -235,7 +235,7 @@ export default function Projects() {
 
                   <button
                     onClick={() => setSelectedProjectModal(project)}
-                    className="text-xs text-muted-foreground hover:text-emerald-500 underline font-medium transition-colors"
+                    className="text-xs text-muted-foreground hover:text-emerald-400 font-mono underline font-medium transition-colors"
                   >
                     Details
                   </button>
@@ -255,7 +255,7 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-background/80 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+            className="fixed inset-0 z-[100] bg-background/85 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
             onClick={() => setSelectedProjectModal(null)}
           >
             <motion.div
@@ -264,7 +264,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="neomorph-card max-w-2xl w-full rounded-3xl overflow-hidden border border-border/50 shadow-2xl relative my-auto max-h-[85vh] flex flex-col"
+              className="obsidian-card max-w-2xl w-full rounded-3xl overflow-hidden border border-border/50 shadow-2xl relative my-auto max-h-[85vh] flex flex-col"
             >
               
               <button
@@ -286,7 +286,7 @@ export default function Projects() {
 
               <div className="p-6 md:p-8 space-y-4 overflow-y-auto flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs px-3 py-1 rounded-full font-semibold">
+                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold font-mono">
                     {selectedProjectModal.category || 'Project'}
                   </span>
                   {selectedProjectModal.createdAt && (
@@ -294,7 +294,7 @@ export default function Projects() {
                   )}
                 </div>
 
-                <h2 className="text-3xl font-extrabold text-gradient-emerald">{selectedProjectModal.title}</h2>
+                <h2 className="text-3xl font-extrabold text-gradient-obsidian">{selectedProjectModal.title}</h2>
 
                 <p className="text-foreground/90 text-sm md:text-base leading-relaxed">
                   {selectedProjectModal.longDescription || selectedProjectModal.description}
@@ -304,7 +304,7 @@ export default function Projects() {
                   <h4 className="text-xs font-mono uppercase text-emerald-600 dark:text-emerald-400 tracking-wider font-bold">Technologies Used</h4>
                   <div className="flex gap-2 flex-wrap">
                     {selectedProjectModal.techStack.map((tech) => (
-                      <span key={tech} className="neomorph-pill px-3 py-1 rounded-xl text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                      <span key={tech} className="px-3 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-300 text-xs font-mono font-medium">
                         {tech}
                       </span>
                     ))}
@@ -317,7 +317,7 @@ export default function Projects() {
                       href={selectedProjectModal.liveDemoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="neomorph-btn px-6 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
+                      className="emerald-glow-btn px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm hover:scale-105 transition-all"
                     >
                       <FaExternalLinkAlt /> Launch Live Application
                     </a>
@@ -327,7 +327,7 @@ export default function Projects() {
                       href={selectedProjectModal.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="neomorph-btn px-6 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 hover:scale-105 transition-all"
+                      className="neomorph-btn px-6 py-3 rounded-xl font-semibold flex items-center gap-2 text-sm text-foreground/85 hover:text-emerald-400 hover:scale-105 transition-all"
                     >
                       <FaGithub /> Source Code
                     </a>

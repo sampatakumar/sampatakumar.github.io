@@ -97,24 +97,35 @@ export default function Home() {
             lg:text-left
             "
           >
-            {/* Live Availability Badge */}
-            <div className="flex justify-center lg:justify-start">
-              <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+            {/* Live Career & Availability HUD */}
+            <div className="flex flex-wrap items-center gap-2.5 justify-center lg:justify-start">
+              {/* Availability Status */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide backdrop-blur-xl shadow-[0_0_20px_rgba(16,185,129,0.18)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <GlitchText text="Full-Stack Web Developer & Software Engineer" className="text-emerald-600 dark:text-emerald-400" />
-              </span>
+                <span>Available for Full-Time Engineering Roles</span>
+              </div>
+
+              {/* Location Pill */}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/40 dark:bg-white/[0.04] border border-border/60 text-muted-foreground text-xs font-medium backdrop-blur-xl">
+                <span className="text-emerald-500">📍</span> Bengaluru, IN
+              </div>
+
+              {/* Focus Pill */}
+              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/40 dark:bg-white/[0.04] border border-border/60 text-muted-foreground text-xs font-mono backdrop-blur-xl">
+                <span className="text-cyan-400">⚡</span> React 19 · TypeScript · AI Systems
+              </div>
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-xl sm:text-2xl font-semibold text-emerald-600 dark:text-emerald-400 tracking-wide">
-                <BlurText text="Hello, World! I am" />
+              <h3 className="text-sm sm:text-base font-mono font-medium tracking-widest text-emerald-600 dark:text-emerald-400 uppercase">
+                <BlurText text="Software Engineer & Full-Stack Architect" />
               </h3>
 
-              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight">
-                <span className="text-gradient-emerald">Sampatakumar V</span>
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08]">
+                <span className="text-gradient-obsidian">Sampatakumar V</span>
               </h1>
             </div>
 
@@ -135,24 +146,29 @@ export default function Home() {
               />
             </div>
 
-            {/* Live Interactive Terminal Window */}
-            <div className="neomorph-inset rounded-2xl p-4 font-mono text-xs text-foreground/90 shadow-inner text-left shrink-0">
+            {/* Elite Obsidian Terminal Window */}
+            <div className="obsidian-card p-4 font-mono text-xs text-foreground/90 shadow-inner text-left shrink-0">
               <div className="flex items-center justify-between pb-2.5 border-b border-border/40 mb-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                  <span className="ml-2 text-muted-foreground text-[11px] flex items-center gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
+                  <span className="ml-2 text-muted-foreground text-[11px] flex items-center gap-1 font-mono">
                     <FaTerminal className="text-emerald-500 text-xs" /> developer@sampatakumar:~
                   </span>
                 </div>
-                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 neomorph-pill px-2 py-0.5 rounded">JS/TS</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/25 font-semibold font-mono">TS / React 19</span>
+                  <span className="text-[10px] text-cyan-600 dark:text-cyan-400 px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/25 font-semibold font-mono">Node.js</span>
+                </div>
               </div>
-              <div className="space-y-1 leading-relaxed">
-                <p><span className="text-emerald-600 dark:text-emerald-400">const</span> <span className="text-teal-600 dark:text-cyan-300">stack</span> = &#123;</p>
-                <p className="pl-4"><span className="text-muted-foreground">frontend:</span> [<span className="text-emerald-700 dark:text-emerald-300">'React.js'</span>, <span className="text-emerald-700 dark:text-emerald-300">'TypeScript'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Tailwind CSS'</span>],</p>
-                <p className="pl-4"><span className="text-muted-foreground">backend:</span> [<span className="text-teal-700 dark:text-cyan-300">'Node.js'</span>, <span className="text-teal-700 dark:text-cyan-300">'Express.js'</span>, <span className="text-teal-700 dark:text-cyan-300">'REST APIs'</span>],</p>
-                <p className="pl-4"><span className="text-muted-foreground">databases:</span> [<span className="text-emerald-700 dark:text-emerald-300">'Firebase'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Supabase'</span>, <span className="text-emerald-700 dark:text-emerald-300">'PostgreSQL'</span>]</p>
+              <div className="space-y-1 leading-relaxed text-[12px]">
+                <p><span className="text-emerald-600 dark:text-emerald-400 font-semibold">const</span> <span className="text-teal-600 dark:text-cyan-300">engineer</span> = &#123;</p>
+                <p className="pl-4"><span className="text-muted-foreground">name:</span> <span className="text-emerald-700 dark:text-emerald-300">'Sampatakumar V'</span>,</p>
+                <p className="pl-4"><span className="text-muted-foreground">role:</span> <span className="text-emerald-700 dark:text-emerald-300">'Full-Stack Software Engineer'</span>,</p>
+                <p className="pl-4"><span className="text-muted-foreground">frontend:</span> [<span className="text-emerald-700 dark:text-emerald-300">'React 19'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Next.js'</span>, <span className="text-emerald-700 dark:text-emerald-300">'TypeScript'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Tailwind CSS'</span>],</p>
+                <p className="pl-4"><span className="text-muted-foreground">backend:</span> [<span className="text-teal-700 dark:text-cyan-300">'Node.js'</span>, <span className="text-teal-700 dark:text-cyan-300">'Express'</span>, <span className="text-teal-700 dark:text-cyan-300">'REST APIs'</span>, <span className="text-teal-700 dark:text-cyan-300">'PostgreSQL'</span>],</p>
+                <p className="pl-4"><span className="text-muted-foreground">cloudAI:</span> [<span className="text-emerald-700 dark:text-emerald-300">'Groq / LangChain'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Firebase'</span>, <span className="text-emerald-700 dark:text-emerald-300">'Supabase'</span>]</p>
                 <p>&#125;;</p>
               </div>
             </div>
@@ -195,8 +211,8 @@ export default function Home() {
                 { label: 'Core Stack', value: 'React / TS' },
                 { label: 'Architecture', value: '100% Static' },
               ].map((stat, i) => (
-                <div key={i} className="neomorph-inset p-3 rounded-2xl flex flex-col justify-center">
-                  <span className="font-extrabold text-base sm:text-lg text-gradient-emerald">{stat.value}</span>
+                <div key={i} className="obsidian-card p-3.5 flex flex-col justify-center">
+                  <span className="font-extrabold text-base sm:text-lg text-gradient-obsidian">{stat.value}</span>
                   <span className="text-[11px] text-muted-foreground font-mono">{stat.label}</span>
                 </div>
               ))}
@@ -208,17 +224,17 @@ export default function Home() {
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 blur-xl opacity-60 pointer-events-none"></div>
             <ProfileCard
               name="Sampatakumar V"
-              title="Full-Stack Developer"
+              title="Full-Stack Software Engineer"
               handle="sampatakumar_sv"
-              status="Online"
-              contactText="Contact Me"
+              status="Available for Roles"
+              contactText="Get in Touch"
               avatarUrl="/avatar.png"
               iconUrl="/brands/github.svg"
               showUserInfo
               enableTilt
               enableMobileTilt
               behindGlowEnabled
-              behindGlowColor="rgba(16, 185, 129, 0.35)"
+              behindGlowColor="rgba(16, 185, 129, 0.4)"
               innerGradient="linear-gradient(145deg, var(--card) 0%, var(--background) 100%)"
               onContactClick={() =>
                 window.location.href = "mailto:sampatakumarsv@gmail.com"
@@ -230,7 +246,9 @@ export default function Home() {
 
       </section>
 
-      <hr className="border-border/30 w-[90%] mx-auto" />
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
 
       {/* ================= ABOUT ================= */}
       <section
@@ -241,10 +259,10 @@ export default function Home() {
           
           {/* Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neomorph-pill text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wider uppercase">
-              <FaLaptopCode /> Passion · Engineering · Innovation
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wider uppercase font-mono">
+              <FaLaptopCode /> Engineering Mindset & Architecture
             </div>
-            <ScrollReveal textClassName="text-4xl md:text-5xl font-extrabold tracking-tight text-gradient-emerald">
+            <ScrollReveal textClassName="text-4xl md:text-5xl font-extrabold tracking-tight text-gradient-obsidian">
               About Me & Engineering Vision
             </ScrollReveal>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
@@ -261,7 +279,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="lg:col-span-2 neomorph-card neomorph-card-hover p-6 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 relative overflow-hidden group"
+              className="lg:col-span-2 obsidian-card obsidian-card-hover p-6 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 relative overflow-hidden group"
             >
               <div className="space-y-5">
                 <div className="flex items-center justify-between pb-3 border-b border-border/40">
@@ -336,7 +354,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6"
+              className="obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6"
             >
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-border/40 mb-4">
@@ -398,7 +416,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
+              className="obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4"
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider pb-3 border-b border-border/40">
@@ -441,7 +459,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.25 }}
-              className="lg:col-span-2 neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4 font-mono text-xs"
+              className="lg:col-span-2 obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-4 font-mono text-xs"
             >
               <div className="flex items-center justify-between pb-3 border-b border-border/40">
                 <div className="flex items-center gap-1.5">
@@ -491,7 +509,9 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="border-border/30 w-[90%] mx-auto" />
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
 
       {/* ================= THE STACK ================= */}
       <section
@@ -501,9 +521,14 @@ export default function Home() {
         <div className="w-full max-w-7xl">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
-            <ScrollReveal textClassName="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground dark:text-slate-100">
-              THE STACK
-            </ScrollReveal>
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-semibold tracking-wider uppercase font-mono mb-3">
+                <FaBolt /> Production Technologies
+              </div>
+              <ScrollReveal textClassName="text-4xl md:text-6xl font-extrabold tracking-tight text-gradient-obsidian">
+                THE STACK
+              </ScrollReveal>
+            </div>
             <p className="text-muted-foreground text-sm md:text-base max-w-xs leading-relaxed text-left sm:text-right">
               Technologies I use to build scalable, maintainable, and production-ready applications.
             </p>
@@ -540,11 +565,11 @@ export default function Home() {
             ].map((stack) => (
               <div
                 key={stack.id}
-                className="neomorph-card neomorph-card-hover p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-border/40 flex flex-col md:flex-row md:items-center justify-between gap-6 group transition-all duration-300"
+                className="obsidian-card obsidian-card-hover p-6 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-6 group transition-all duration-300"
               >
                 {/* Left: ID + Category */}
                 <div className="flex items-center gap-6 sm:gap-10 shrink-0">
-                  <span className="font-mono text-xs sm:text-sm text-muted-foreground/70 tracking-wider font-semibold select-none">
+                  <span className="font-mono text-xs sm:text-sm text-emerald-500/80 tracking-wider font-semibold select-none">
                     {stack.id}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
@@ -569,7 +594,9 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="border-border/30 w-[90%] mx-auto" />
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
 
       {/* ================= PROJECTS ================= */}
 
@@ -577,15 +604,24 @@ export default function Home() {
         id="projects"
         className="px-6 lg:px-20 py-24"
       >
-
-        <ScrollReveal textClassName="text-4xl md:text-5xl font-extrabold text-center text-gradient-emerald mb-16">
-          Featured Full-Stack Projects
-        </ScrollReveal>
+        <div className="text-center space-y-4 mb-16 max-w-3xl mx-auto flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wider uppercase font-mono">
+            <FaRocket /> Live Applications & Architecture
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-center text-gradient-obsidian tracking-tight">
+            Featured Full-Stack Projects
+          </h2>
+          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl text-center leading-relaxed">
+            Explore 12 interactive applications engineered with modern web frameworks, AI agent pipelines, and resilient cloud services.
+          </p>
+        </div>
 
         <ProjectCarousel projects={projects} />
       </section>
 
-      <hr className="border-border/30 w-[90%] mx-auto" />
+      <div className="w-[90%] max-w-7xl mx-auto my-6">
+        <div className="obsidian-divider w-full" />
+      </div>
 
       {/* ================= CONTACT / CTA ================= */}
       <section
@@ -656,7 +692,8 @@ export default function Home() {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="neomorph-card border-t border-border/40 bg-background/90 backdrop-blur-lg py-10 px-6">
+      <div className="obsidian-divider w-full" />
+      <footer className="obsidian-card border-t border-border/40 bg-background/90 backdrop-blur-xl py-10 px-6 rounded-none border-x-0 border-b-0">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
 
           <div className="text-muted-foreground text-sm text-center md:text-left">
