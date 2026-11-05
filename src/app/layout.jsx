@@ -1,30 +1,8 @@
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 import SmoothScrollProvider from "@/components/motion/SmoothScrollProvider";
 import CustomCursor from "@/components/motion/CustomCursor";
 import MotionToggle from "@/components/motion/MotionToggle";
 import { profile } from "@/data/profile";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata = {
   metadataBase: new URL("https://sampatakumar.github.io"),
@@ -149,7 +127,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} dark`}
+      className="dark"
     >
       <body className="font-sans bg-canvas text-editorial-light selection:bg-accent selection:text-canvas antialiased">
         {/* JSON-LD Structured Data */}

@@ -46,6 +46,27 @@ If static export to GitHub Pages (`sampatakumar.github.io`) is desired:
 
 ---
 
+## 2. Render Deployment: Static Site (Active on branch `vercel`)
+
+### Operational Setup for Render Static Site
+Render Static Sites host static HTML/CSS/JS with global CDN distribution.
+- **Repository:** `https://github.com/sampatakumar/sampatakumar.github.io`
+- **Branch:** `vercel`
+- **Build Command:** `npm run build`
+- **Publish Directory:** `out`
+- **Blueprint:** `render.yaml` (included at repository root)
+
+### Why Static Site 404 Occurred and How It Was Resolved:
+1. **Previous Cause:** Next.js by default creates a Node.js server build in `.next/`. Render's Static Site hosting looks for static HTML files (`index.html`) inside the configured publish directory. Without `output: 'export'`, no `out/index.html` was generated, leading to HTTP 404 (Not Found).
+2. **Resolution Applied:**
+   - Enabled `output: 'export'` and `trailingSlash: true` in `next.config.mjs`.
+   - Enabled `images: { unoptimized: true }` for standalone static CDN delivery.
+   - Removed dynamic server-dependent API handlers to allow pure zero-runtime static HTML export.
+   - Set Render Publish Directory to `out`.
+   - Added rewrite rules in `render.yaml` for client-side routing.
+
+---
+
 ## 3. Production Verification Checklist
 
 Before deploying:

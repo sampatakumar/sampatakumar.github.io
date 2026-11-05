@@ -108,3 +108,4 @@ npm start
 - Code released under the **MIT License**.
 - Academic publication: *"Smart Skill Hub: Autonomous Skill Intelligence, Career Acceleration & Adaptive Learning Systems"* published in **IRE Journals** (ISSN: `2456-8880`).
 - &copy; 2026 Sampatakumar V. All rights reserved.
+

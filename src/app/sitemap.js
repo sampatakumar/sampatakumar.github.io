@@ -1,5 +1,7 @@
 import { projects } from "@/data/projects";
 
+export const dynamic = "force-static";
+
 export default async function sitemap() {
   const baseUrl = "https://sampatakumar.github.io";
 

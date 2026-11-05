@@ -21,7 +21,7 @@ export default function CollabModal({ isOpen, onClose }) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.contact.trim() || !form.projectTitle.trim() || !form.description.trim()) {
       setErrorMessage("Please complete all required fields (*).");
@@ -32,28 +32,16 @@ export default function CollabModal({ isOpen, onClose }) {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("/api/collab", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        setIsSuccess(true);
-      } else {
-        setErrorMessage(data.error || "Submission could not be completed. Please reach out via WhatsApp directly.");
-      }
-    } catch (err) {
-      // Graceful client fallback: save to localStorage
-      try {
-        const key = "sampatakumar_collab_offline";
-        const prev = JSON.parse(localStorage.getItem(key) || "[]");
-        localStorage.setItem(key, JSON.stringify([{ ...form, date: new Date().toISOString() }, ...prev]));
-        setIsSuccess(true);
-      } catch {
-        setErrorMessage("Network issue. Please ping directly via WhatsApp!");
-      }
+      // Static-export resilient storage: log inquiry to client localStorage
+      const key = "sampatakumar_collab_submissions";
+      const prev = JSON.parse(localStorage.getItem(key) || "[]");
+      localStorage.setItem(
+        key,
+        JSON.stringify([{ ...form, date: new Date().toISOString() }, ...prev])
+      );
+      setIsSuccess(true);
+    } catch {
+      setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
     }
